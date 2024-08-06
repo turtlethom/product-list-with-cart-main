@@ -119,7 +119,7 @@ function populateProductSection(jsonData) {
 
         /* Creating The Picture Content w/ Images & ATC Button */
         const pictureContent = createPictureContent(image);
-        pictureContent.classList.add('picture-content');
+        pictureContent.classList.add('picture-content', 'stacked');
 
         /* Creating Product Content w/ Name, Category, & Price */
         const productContent = createProductContent(name, category, price);

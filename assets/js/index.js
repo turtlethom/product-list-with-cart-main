@@ -26,7 +26,7 @@ retrieveProductInfo(productData);
 Product Item Layout
 <div class="product-card">
     <div class="picture-content">
-        <picture class="product-pic">{productImages}</picture>
+        <picture class="product-picture">{productImages}</picture>
         <button class="atc-btn">
             <img src="./assets/images/icon-add-to-cart.svg">
             Add To Cart
