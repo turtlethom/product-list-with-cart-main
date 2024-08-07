@@ -92,23 +92,26 @@
 
 .layout {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px 20rem 2fr;
+
     margin: 5rem 3rem;
     gap: 1rem;
     column-gap: 3rem;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 50px 20rem 2fr;
 }
 
 .layout h1 {
     grid-column: 1 / 4;
     grid-row: 1;
+
     padding-left: 1rem;
 }
 
 .layout #products-section {
-    justify-self: end;
     grid-column: 1 / 3;
     grid-row: 2 / 4;
+
+    justify-self: end;
 }
 
 .layout #atc-section {
@@ -118,58 +121,52 @@
 
 /* ==================================== */
 
+/* Product Display Styling */
 #product-grid {
     --repeat: 3;
     display: grid;
-    padding: 1rem;
-    inline-size: 100%;
     grid-template-columns: 
         repeat(var(--repeat, auto-fit), minmax(175px, 1fr));
+    
     column-gap: 2rem;
+    padding: 1rem;
 }
 
 .product-card {
     display: flex;
     flex-direction: column;
+
     row-gap: 1rem;
 }
 
-.picture-content {
-    position: relative;
-}
+.picture-content { position: relative; }
 
-.picture-content .atc-btn {
+.picture-content .atc-btn,
+.picture-content .atc-counter-btn {
     position: relative;
     justify-self: center;
     align-self: flex-end;
+
     bottom: -1rem;
     padding: 0.5rem 1.5rem;
     border-radius: 2em;
     border: 1px solid hsl(var(--rose-900));
 }
 
-.product-content > *:not(.product-name) {
-    width: max-content;
-}
+.product-content > *:not(.product-name) { width: max-content; }
 
-.product-picture {
-    width: 100%;
-}
+.product-picture > img { border-radius: 1em; }
 
-.product-picture > img {
-    border-radius: 1em;
-}
-
-.atc-btn {
+.atc-btn, .atc-counter-btn {
     display: flex;
+
     width: max-content;
     gap: 0.5rem;
 }
 
-.product-content {
-    padding-block: 1rem;
-}
+.product-content { padding-block: 1rem; }
 
+/* Add To Cart Styling */
 #atc-section {
     inline-size: 100%;
     padding: 3rem 2rem 3rem;
@@ -184,10 +181,12 @@
     justify-self: flex-start;
 }
 
+/* Handling Hovering/Focusing Styling */
+
 .attribution {
-    /* position: absolute; */
-    bottom: 0;
-    font-size: 11px; text-align: center;
+    font-size: 11px; 
+    text-align: center;
+    margin-bottom: 2rem;
 }
 .attribution a { color: hsl(228, 45%, 44%); }
 

@@ -31,6 +31,7 @@ Product Item Layout
             <img src="./assets/images/icon-add-to-cart.svg">
             Add To Cart
         </button>
+        <!--Replacing "atc-btn" with "atc-counter-btn"-->
     </div>
     <div class="product-content">
         <h2 class="product-name">{productName}</h2>
