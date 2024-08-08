@@ -20,28 +20,37 @@ function createATCButton(source, text) {
     return button;
 }
 
-function createCounterATCButton(decrementSrc, incrementSrc) {
+function createDecrementButton(decrementSource) {
     const button = document.createElement('button');
-    button.counter = 0;
-
-    const decrementImg = document.createElement('img');
-    const incrementImg = document.createElement('img');
-    decrementImg.src = decrementSrc;
-    incrementImg.src = incrementSrc;
-
-    const buttonText = document.createTextNode(button.counter);
-
-    const buttonClasses = [
-        "atc-counter-btn",
-        "fw-600",
-    ]
-
-    button.append(decrementImg, buttonText, incrementImg);
-
-    button.classList.add(...buttonClasses)
-    // button.textContent = button.counter;
-
+    const image = document.createElement('img');
+    image.src = decrementSource;
+    
+    button.append(image);
     return button;
+}
+
+function createIncrementButton(incrementSource) {
+    const button = document.createElement('button');
+    const image = document.createElement('img');
+    image.src = incrementSource;
+
+    button.append(image);
+    return button;
+}
+
+function createCounterATCButton(decrementSrc, incrementSrc) {
+    const counterContainer = document.createElement('div');
+    const decrementBtn = createDecrementButton(decrementSrc);
+    const incrementBtn = createIncrementButton(incrementSrc);
+    
+    const counterDisplay = document.createElement('span');
+    const text = document.createTextNode('0');
+    counterDisplay.append(text);
+
+    counterContainer.append(decrementBtn, counterDisplay, incrementBtn);
+    counterContainer.classList.add('atc-counter-btn');
+
+    return counterContainer;
 }
 
 export { createATCButton, createCounterATCButton };
