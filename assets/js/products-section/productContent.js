@@ -1,5 +1,7 @@
 import createPictureContent from "./pictureContent.js";
 
+const productCounts = {};
+
 /* Handling Creation Of The Product Description */
 function createProductContent(name, category, price) {
     /* Creating `name`, `category`, & `price` elements */
@@ -53,12 +55,15 @@ function createProductContent(name, category, price) {
 function populateProductSection(jsonData) {
     const productGrid = document.getElementById('product-grid');
     /* Iterate over the Product Data */
+    let productId = 1;
     for (let i = 0; i < jsonData.length; i++) {
         const { image, name, category, price } = jsonData[i];
 
         /* Creating Product Container */
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
+        productCard.id = `product-${productId}`;
+        productCard.setAttribute('cartCount', 0);
 
         /* Creating The Picture Content w/ Images & ATC Button */
         const pictureContent = createPictureContent(image);
@@ -73,6 +78,10 @@ function populateProductSection(jsonData) {
 
         /* Appending All Elements To Product Section */
         productGrid.append(productCard);
+
+        /* Creating Unique Ids */
+        console.log(productId)
+        productId++;
     }
 }
 

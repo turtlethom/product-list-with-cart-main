@@ -1,5 +1,7 @@
 import { createCounterATCButton, createATCButton } from "../buttons.js";
 
+/* Create Unique Ids For Each ATC Button */
+let atcButtonId = 0;
 /* Handling Creation Of `Image` Elements */
 function createPicture(image) {
   const picture = document.createElement("picture");
@@ -24,7 +26,6 @@ function createPicture(image) {
 
 function createPictureContent(image) {
   const content = document.createElement("div");
-
   /* Creating <picture> Element */
   const picture = createPicture(image);
   picture.classList.add("product-picture");
@@ -32,13 +33,10 @@ function createPictureContent(image) {
   /* Creating ATC <button> Element */
   const atcSVG = "./assets/images/icon-add-to-cart.svg";
   const atcButton = createATCButton(atcSVG, "Add To Cart");
-
-  /* Creating ATC Counter <button> Element */
-  const decrementSVG = "./assets/images/icon-decrement-quantity.svg";
-  const incrementSVG = "./assets/images/icon-increment-quantity.svg";
-  const atcCounterButton = createCounterATCButton(decrementSVG, incrementSVG);
+  atcButtonId++;
+  atcButton.id = `atc-${atcButtonId}`;
   
-  content.append(picture, atcButton, atcCounterButton);
+  content.append(picture, atcButton);
 
   return content;
 }
