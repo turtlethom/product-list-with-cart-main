@@ -72,8 +72,8 @@ function createATCButton(source, text) {
 
     button.addEventListener('click', () => {
         /* Creating ATC Counter <button> Element */
-        const decrementSVG = "./assets/images/icon-decrement-quantity.svg";
-        const incrementSVG = "./assets/images/icon-increment-quantity.svg";
+        const decrementSVG = "./assets/images/svg/icon-decrement-quantity.svg";
+        const incrementSVG = "./assets/images/svg/icon-increment-quantity.svg";
         const atcCounterButton = createCounterATCButton(decrementSVG, incrementSVG);
         
         /* Appending Counter <button> to parent reference (pictureContent) */

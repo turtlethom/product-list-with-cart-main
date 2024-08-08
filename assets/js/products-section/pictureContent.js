@@ -31,7 +31,7 @@ function createPictureContent(image) {
   picture.classList.add("product-picture");
 
   /* Creating ATC <button> Element */
-  const atcSVG = "./assets/images/icon-add-to-cart.svg";
+  const atcSVG = "./assets/images/svg/icon-add-to-cart.svg";
   const atcButton = createATCButton(atcSVG, "Add To Cart");
   atcButtonId++;
   atcButton.id = `atc-${atcButtonId}`;
