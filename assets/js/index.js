@@ -1,24 +1,24 @@
-import populateProductSection  from "./productContent.js";
+import populateProductSection from "./products-section/productContent.js";
 
 /* Retrieving JSON data for products via Fetch API */
 function retrieveProductInfo(filepath) {
-    fetch(filepath)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Could not retrieve data", response.statusText);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            // console.log(data);
-            populateProductSection(data);
-        })
-        .catch((err) => {
-            console.error("Error with fetching data: ", err);
-        });
+  fetch(filepath)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Could not retrieve data", response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // console.log(data);
+      populateProductSection(data);
+    })
+    .catch((err) => {
+      console.error("Error with fetching data: ", err);
+    });
 }
 
-const productData = '../../data.json';
+const productData = "../../data.json";
 
 retrieveProductInfo(productData);
 

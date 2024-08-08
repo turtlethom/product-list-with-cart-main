@@ -1,24 +1,4 @@
-/* Handling Creation Of `Image` Elements */
-function createPicture(image) {
-    const picture = document.createElement('picture');
-    // Setting up picture srcsets for all viewports
-    const mobileSource = document.createElement('source');
-    mobileSource.srcset = image.mobile;
-    mobileSource.media = "(min-width: 320px) and (max-width: 425px)";
-
-    const tabletSource = document.createElement('source');
-    tabletSource.srcset = image.tablet;
-    tabletSource.media = "(min-width: 425px) and (max-width: 728px)";
-
-    // Setting default image for each product
-    const defaultImg = document.createElement("img");
-    defaultImg.src = image.desktop;
-
-    // Appending all image sources to new `<picture>`
-    picture.append(mobileSource, tabletSource, defaultImg);
-
-    return picture;
-}
+import createPictureContent from "./pictureContent.js";
 
 /* Handling Creation Of The Product Description */
 function createProductContent(name, category, price) {
@@ -65,43 +45,6 @@ function createProductContent(name, category, price) {
     const content = document.createElement('div');
     // ORDERING HERE IS DIFFERENT!!!
     content.append(categoryElement, nameElement, priceElement);
-
-    return content;
-}
-
-/* Handling Creation Of ATC <button> Element */
-function createButton(source, text) {
-    const button = document.createElement('button');
-
-    const buttonImg = document.createElement('img');
-    buttonImg.src = source;
-
-    const buttonText = document.createTextNode(text);
-
-    const buttonClasses = [
-        'atc-btn',
-        'fw-600',
-        'text-rose-900',
-        'product-fs',
-    ];
-    button.append(buttonImg, buttonText);
-    button.classList.add(...buttonClasses);
-
-    return button;
-}
-
-function createPictureContent(image) {
-    const content = document.createElement('div');
-
-    /* Creating <picture> Element */
-    const picture = createPicture(image);
-    picture.classList.add('product-picture');
-
-    /* Creating ATC <button> Element */
-    const atcSVG = './assets/images/icon-add-to-cart.svg';
-    const atcButton = createButton(atcSVG, 'Add To Cart');
-
-    content.append(picture, atcButton);
 
     return content;
 }

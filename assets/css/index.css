@@ -153,6 +153,28 @@
     border: 1px solid hsl(var(--rose-900));
 }
 
+.atc-counter-btn {
+    align-items: center;
+    gap: 1rem;
+    background-color: hsl(var(--red));
+}
+
+.atc-counter-btn > img {
+    border: 1px solid white;
+    border-radius: 1em;
+}
+.atc-counter-btn > img:first-child {
+    left: 0;
+    padding: 0.5rem 0.25em;
+    margin-inline-end: 2rem;
+    
+}
+.atc-counter-btn > img:last-child {
+    border: 1px solid white;
+    padding: 0.25em;
+    margin-inline-start: 2rem;
+}
+
 .product-content > *:not(.product-name) { width: max-content; }
 
 .product-picture > img { border-radius: 1em; }
@@ -181,7 +203,11 @@
     justify-self: flex-start;
 }
 
-/* Handling Hovering/Focusing Styling */
+/* Handling Hovering/Focusing & Other State Styling */
+
+.hidden {
+    display: none;
+}
 
 .attribution {
     font-size: 11px; 
