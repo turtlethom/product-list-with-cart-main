@@ -1,10 +1,12 @@
+/* Buttons For ATC Counter Container */
 function createDecrementButton(decrementSource) {
     const button = document.createElement('button');
     const image = document.createElement('img');
     image.src = decrementSource;
     
     button.append(image);
-
+    button.classList.add('decrement');
+    
     return button;
 }
 
@@ -14,10 +16,11 @@ function createIncrementButton(incrementSource) {
     image.src = incrementSource;
     
     button.append(image);
+    button.classList.add('increment');
     
     return button;
 }
-
+/* ================================== */
 function createCounterATCButton(decrementSrc, incrementSrc) {
     /* Initializing Container/Wrapper & cart count for individual  */
     const container = document.createElement('div');
@@ -90,4 +93,4 @@ function createATCButton(source, text) {
     return button;
 }
 
-export { createATCButton, createCounterATCButton };
+export default createATCButton;

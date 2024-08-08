@@ -157,7 +157,7 @@
 .atc-btn {
     width: max-content;
     gap: 0.5rem;
-    padding: 0.5rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 2em;
     border: 1px solid hsl(var(--rose-900));
 }
@@ -171,7 +171,7 @@
     justify-content: space-around;
 }
 
-.atc-counter-btn button {
+.decrement, .increment {
     border-radius: 2em;
     border: 1px solid white;
     background-color: hsl(var(--red));
@@ -185,7 +185,7 @@
 
 #atc-section {
     inline-size: 100%;
-    padding: 3rem 2rem 3rem;
+    padding: 2rem 2rem 3rem;
     border-radius: 1em;
 }
 
@@ -202,6 +202,17 @@
 .hidden {
     display: none;
 }
+
+.atc-btn:hover {
+    border-color: hsl(var(--red));
+    color: hsl(var(--red));
+}
+
+.decrement:hover, .increment:hover {
+    background-color: white;
+}
+
+/* =============================================== */
 
 .attribution {
     font-size: 11px; 
