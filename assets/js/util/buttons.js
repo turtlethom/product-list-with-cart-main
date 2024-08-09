@@ -63,8 +63,8 @@ function createCounterATCButton(productId, baseAtcButton) {
         productCard.dataset.count = productInCart;
  
         if (productInCart <= 0) {
-            decrementBtn.parentElement.classList.add('hidden');
-            baseAtcButton.classList.remove('hidden');
+            decrementBtn.parentElement.remove();
+            baseAtcButton.classList.add('hidden');
         }
     });
 
