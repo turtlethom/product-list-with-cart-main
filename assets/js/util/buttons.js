@@ -56,6 +56,7 @@ function createCounterATCButton(decrementSrc, incrementSrc) {
             decrementBtn.parentElement.classList.add('hidden');
             let originalATCButton = decrementBtn.parentElement.parentElement.children[1];
             originalATCButton.classList.remove('hidden')
+
         }
     });
 

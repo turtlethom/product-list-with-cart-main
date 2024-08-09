@@ -99,6 +99,10 @@ button {
     cursor: pointer;
 }
 
+hr {
+    border: 1px solid hsl(var(--rose-100));
+}
+
 /* Custom CSS */
 
 /* Layout Controls */
@@ -190,10 +194,6 @@ button {
     background-color: hsl(var(--red));
 }
 
-.svg-container {
-    width: 100%;
-}
-
 .atc-counter-btn span {
     pointer-events: none;
 }
@@ -201,17 +201,43 @@ button {
 /* Add To Cart (User's Current Cart) Section Styling */
 
 #atc-section {
-    inline-size: 100%;
     padding: 2rem 2rem 3rem;
     border-radius: 1em;
 }
 
-#cart-list {
-    row-gap: 3rem;
+#atc-section > h3 { justify-self: start; }
+.empty-cart { gap: 1.5rem; }
+
+.cart-item {
+    display: grid;
+    row-gap: 0.5rem;
+    grid-template-areas: 
+    "title   title   btn"
+    "details details btn"
+    ;
+}
+.unit-title { grid-area: title; }
+.cart-item-details { grid-area: details; }
+.remove-btn { grid-area: btn; }
+
+.cart-item { 
+    align-items: center;
+    padding-block: 1rem;
+}
+.cart-item-details {
+    display: flex;
+    gap: 0.5rem;
 }
 
-#cart-list h3 {
-    justify-self: flex-start;
+.cart-item-details:nth-child(2)::first-letter {
+    font-size: 1rem;
+}
+.remove-btn {
+    border-radius: 1em;
+    padding: 0.2rem;
+    border: 1px solid hsl(var(--rose-500));
+    background-color: white;
+    margin-left: auto;
 }
 
 /* Handling Hovering/Focusing & Other State Styling */
