@@ -64,7 +64,7 @@ function createCounterATCButton(productId, baseAtcButton) {
  
         if (productInCart <= 0) {
             decrementBtn.parentElement.remove();
-            baseAtcButton.classList.add('hidden');
+            baseAtcButton.classList.remove('hidden');
         }
     });
 
@@ -86,7 +86,7 @@ function createCounterATCButton(productId, baseAtcButton) {
 
 /* Handling Creation Of ATC <button> Element */
 function createATCButton(source, text, productId) {
-    const button = document.createElement("button");
+    const baseATCButton = document.createElement("button");
 
     const buttonImg = document.createElement("img");
     buttonImg.src = source;
@@ -100,18 +100,18 @@ function createATCButton(source, text, productId) {
         "product-fs",
     ];
 
-    button.append(buttonImg, buttonText);
-    button.id = `base-atc-${productId}`;
-    button.classList.add(...buttonClasses);
+    baseATCButton.append(buttonImg, buttonText);
+    baseATCButton.id = `base-atc-${productId}`;
+    baseATCButton.classList.add(...buttonClasses);
 
-    /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
-    const baseAtcButton = document.getElementById(button.id);
-    console.log(baseAtcButton)
-
-    button.addEventListener('click', () => {
+    baseATCButton.addEventListener('click', () => {
 
         /* Selecting Current Product Card */
         const productCard = document.getElementById(`product-${productId}`);
+
+        /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
+        const baseAtcButton = document.getElementById(baseATCButton.id);
+ 
         /* Initializing Product Card's Cart Count To 1 */
         productCard.dataset.count = "1";
 
@@ -119,19 +119,14 @@ function createATCButton(source, text, productId) {
         const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
         
         /* Appending Counter <button> to parent reference (pictureContent) */
-        const pictureContent = button.parentElement;
+        const pictureContent = baseATCButton.parentElement;
         pictureContent.append(atcCounterButton);
 
-        /* Passing `cartcount` value to counter button's `count` */
-        /* Setting <span> within counter button container to the current count */
-        atcCounterButton.count = cartCount += 1;
-        atcCounterButton.children[1].textContent = `${cartCount}`;
-
         /* Hiding Initial ATC Button */
-        button.classList.add('hidden');
+        baseATCButton.classList.add('hidden');
     })
 
-    return button;
+    return baseATCButton;
 }
 
 export default createATCButton;
