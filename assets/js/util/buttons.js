@@ -44,22 +44,27 @@ function createIncrementButton() {
 function createCounterATCButton(productId, baseAtcButton) {
     /* Initializing Container/Wrapper & cart count for individual  */
     const container = document.createElement('div');
-
-    /* Selecting Current Product Container & Getting Current Product Amount In Cart */
-    const productCard = document.getElementById(`product-${productId}`);
-    let productInCart = parseInt(productCard.dataset.count);
-
+    /* Creating Element For Displaying Current Count */
     const counterDisplay = document.createElement('span');
+    /* Selecting Current Product Card */
+    const productCard = document.getElementById(`product-${productId}`);
+    /* Parsing Count String Into Int */
+    let productInCart = parseInt(productCard.dataset.count); // 0
+
     counterDisplay.textContent = `${productInCart}`;
 
     /* Decrement Functionality */
     const decrementBtn = createDecrementButton();
     decrementBtn.addEventListener('click', () => {
         productInCart -= 1;
+        // Updating Text
         counterDisplay.textContent = productInCart;
+        // Updating Cart Count On Product Card Instance
+        productCard.dataset.count = productInCart;
+ 
         if (productInCart <= 0) {
             decrementBtn.parentElement.classList.add('hidden');
-            baseAtcButton.classList.remove('hidden')
+            baseAtcButton.classList.remove('hidden');
         }
     });
 
@@ -67,7 +72,10 @@ function createCounterATCButton(productId, baseAtcButton) {
     const incrementBtn = createIncrementButton();
     incrementBtn.addEventListener('click', () => {
         productInCart += 1;
+        // Updating Text
         counterDisplay.textContent = productInCart;
+        // Updating Cart Count On Product Card Instance
+        productCard.dataset.count = productInCart;
     });
 
     container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -101,6 +109,12 @@ function createATCButton(source, text, productId) {
     console.log(baseAtcButton)
 
     button.addEventListener('click', () => {
+
+        /* Selecting Current Product Card */
+        const productCard = document.getElementById(`product-${productId}`);
+        /* Initializing Product Card's Cart Count To 1 */
+        productCard.dataset.count = "1";
+
         /* Creating ATC Counter <button> Element */
         const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
         
