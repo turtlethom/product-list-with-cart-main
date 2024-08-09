@@ -2,131 +2,123 @@ import { createDecrementSVG, createIncrementSVG } from "./svg.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
-    const button = document.createElement('button');
-    const baseFill = '#fff';
-    const hoverFill = 'hsl(var(--red))';
-    const { svg, path } = createDecrementSVG(baseFill);
-    
-    button.append(svg);
-    button.classList.add('decrement');
+  const button = document.createElement("button");
+  const baseFill = "#fff";
+  const hoverFill = "hsl(var(--red))";
+  const { svg, path } = createDecrementSVG(baseFill);
 
-    button.addEventListener('mouseover', () => {
-        path.setAttribute('fill', hoverFill)
-    });
+  button.append(svg);
+  button.classList.add("decrement");
 
-    button.addEventListener('mouseout', () => {
-        path.setAttribute('fill', baseFill)
-    })
-    
-    return button;
+  button.addEventListener("mouseover", () => {
+    path.setAttribute("fill", hoverFill);
+  });
+
+  button.addEventListener("mouseout", () => {
+    path.setAttribute("fill", baseFill);
+  });
+
+  return button;
 }
 
 function createIncrementButton() {
-    const button = document.createElement('button');
-    const baseFill = '#fff';
-    const hoverFill = 'hsl(var(--red))';
-    const { svg, path } = createIncrementSVG(baseFill);
-    
-    button.append(svg);
-    button.classList.add('increment');
+  const button = document.createElement("button");
+  const baseFill = "#fff";
+  const hoverFill = "hsl(var(--red))";
+  const { svg, path } = createIncrementSVG(baseFill);
 
-    button.addEventListener('mouseover', () => {
-        path.setAttribute('fill', hoverFill)
-    });
+  button.append(svg);
+  button.classList.add("increment");
 
-    button.addEventListener('mouseout', () => {
-        path.setAttribute('fill', baseFill)
-    })
-    
-    return button;
+  button.addEventListener("mouseover", () => {
+    path.setAttribute("fill", hoverFill);
+  });
+
+  button.addEventListener("mouseout", () => {
+    path.setAttribute("fill", baseFill);
+  });
+
+  return button;
 }
 /* ================================== */
 function createCounterATCButton(productId, baseAtcButton) {
-    /* Initializing Container/Wrapper & cart count for individual  */
-    const container = document.createElement('div');
-    /* Creating Element For Displaying Current Count */
-    const counterDisplay = document.createElement('span');
-    /* Selecting Current Product Card */
-    const productCard = document.getElementById(`product-${productId}`);
-    /* Parsing Count String Into Int */
-    let productInCart = parseInt(productCard.dataset.count); // 0
+  /* Initializing Container/Wrapper & cart count for individual  */
+  const container = document.createElement("div");
+  /* Creating Element For Displaying Current Count */
+  const counterDisplay = document.createElement("span");
+  /* Selecting Current Product Card */
+  const productCard = document.getElementById(`product-${productId}`);
+  /* Parsing Count String Into Int */
+  let productInCart = parseInt(productCard.dataset.count); // 0
 
-    counterDisplay.textContent = `${productInCart}`;
+  counterDisplay.textContent = `${productInCart}`;
 
-    /* Decrement Functionality */
-    const decrementBtn = createDecrementButton();
-    decrementBtn.addEventListener('click', () => {
-        productInCart -= 1;
-        // Updating Text
-        counterDisplay.textContent = productInCart;
-        // Updating Cart Count On Product Card Instance
-        productCard.dataset.count = productInCart;
- 
-        if (productInCart <= 0) {
-            decrementBtn.parentElement.remove();
-            baseAtcButton.classList.remove('hidden');
-        }
-    });
+  /* Decrement Functionality */
+  const decrementBtn = createDecrementButton();
+  decrementBtn.addEventListener("click", () => {
+    productInCart -= 1;
+    // Updating Counter Display To New Count
+    counterDisplay.textContent = productInCart;
+    // Updating New Cart Count On Product Card Instance Itself
+    productCard.dataset.count = productInCart;
 
-    /* Increment Functionality */
-    const incrementBtn = createIncrementButton();
-    incrementBtn.addEventListener('click', () => {
-        productInCart += 1;
-        // Updating Text
-        counterDisplay.textContent = productInCart;
-        // Updating Cart Count On Product Card Instance
-        productCard.dataset.count = productInCart;
-    });
+    if (productInCart <= 0) {
+      decrementBtn.parentElement.remove();
+      baseAtcButton.classList.remove("hidden");
+    }
+  });
 
-    container.append(decrementBtn, counterDisplay, incrementBtn);
-    container.classList.add('atc-counter-btn');
+  /* Increment Functionality */
+  const incrementBtn = createIncrementButton();
+  incrementBtn.addEventListener("click", () => {
+    productInCart += 1;
+    // Updating Counter Display To New Count
+    counterDisplay.textContent = productInCart;
+    // Updating New Cart Count On Product Card Instance Itself
+    productCard.dataset.count = productInCart;
+  });
 
-    return container;
+  container.append(decrementBtn, counterDisplay, incrementBtn);
+  container.classList.add("atc-counter-btn");
+
+  return container;
 }
 
 /* Handling Creation Of ATC <button> Element */
-function createATCButton(source, text, productId) {
-    const baseATCButton = document.createElement("button");
+function createBaseATCButton(source, text, productId) {
+  const baseATCButton = document.createElement("button");
+  const buttonImg = document.createElement("img");
+  buttonImg.src = source;
 
-    const buttonImg = document.createElement("img");
-    buttonImg.src = source;
+  const buttonText = document.createTextNode(text);
+  const buttonClasses = ["atc-btn", "fw-600", "text-rose-900", "product-fs"];
 
-    const buttonText = document.createTextNode(text);
+  baseATCButton.append(buttonImg, buttonText);
+  baseATCButton.id = `base-atc-${productId}`;
+  baseATCButton.classList.add(...buttonClasses);
 
-    const buttonClasses = [
-        "atc-btn",
-        "fw-600",
-        "text-rose-900",
-        "product-fs",
-    ];
+  /* Adding On Click Event For BASE ATC BUTTON */
+  baseATCButton.addEventListener("click", () => {
+      /* Selecting Current Product Card */
+      const productCard = document.getElementById(`product-${productId}`);
+      /* Initializing Product Card's Cart Count To 1 */
+      productCard.dataset.count = "1";
+      
+      /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
+    const baseAtcButton = document.getElementById(baseATCButton.id);
+    /* Creating ATC Counter <button> Element */
+    const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
 
-    baseATCButton.append(buttonImg, buttonText);
-    baseATCButton.id = `base-atc-${productId}`;
-    baseATCButton.classList.add(...buttonClasses);
 
-    baseATCButton.addEventListener('click', () => {
+    /* Appending Counter <button> to parent reference (pictureContent) */
+    const pictureContent = baseATCButton.parentElement;
+    pictureContent.append(atcCounterButton);
 
-        /* Selecting Current Product Card */
-        const productCard = document.getElementById(`product-${productId}`);
+    /* Hiding Initial ATC Button */
+    baseATCButton.classList.add("hidden");
+  });
 
-        /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
-        const baseAtcButton = document.getElementById(baseATCButton.id);
- 
-        /* Initializing Product Card's Cart Count To 1 */
-        productCard.dataset.count = "1";
-
-        /* Creating ATC Counter <button> Element */
-        const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
-        
-        /* Appending Counter <button> to parent reference (pictureContent) */
-        const pictureContent = baseATCButton.parentElement;
-        pictureContent.append(atcCounterButton);
-
-        /* Hiding Initial ATC Button */
-        baseATCButton.classList.add('hidden');
-    })
-
-    return baseATCButton;
+  return baseATCButton;
 }
 
-export default createATCButton;
+export default createBaseATCButton;

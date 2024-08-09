@@ -1,4 +1,4 @@
-import createATCButton from "../util/buttons.js";
+import createBaseATCButton from "../util/buttons.js";
 
 /* Handling Creation Of `Image` Elements */
 function createPicture(image) {
@@ -30,10 +30,10 @@ function createPictureContent(image, productId) {
 
   /* Creating ATC <button> Element */
   const atcSVG = "./assets/images/svg/icon-add-to-cart.svg";
-  const atcButton = createATCButton(atcSVG, "Add To Cart", productId);
-  
+  const atcButton = createBaseATCButton(atcSVG, "Add To Cart", productId);
+
   content.append(picture, atcButton);
-  content.id = `product-${productId}-images`
+  content.id = `product-${productId}-images`;
 
   return content;
 }
