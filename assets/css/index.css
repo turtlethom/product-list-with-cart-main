@@ -190,6 +190,10 @@ button {
     background-color: hsl(var(--red));
 }
 
+.svg-container {
+    width: 100%;
+}
+
 .atc-counter-btn span {
     pointer-events: none;
 }

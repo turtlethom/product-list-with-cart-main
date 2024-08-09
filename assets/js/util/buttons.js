@@ -1,22 +1,42 @@
+import { createDecrementSVG, createIncrementSVG } from "./svg.js";
+
 /* Buttons For ATC Counter Container */
 function createDecrementButton(decrementSource) {
     const button = document.createElement('button');
-    const image = document.createElement('img');
-    image.src = decrementSource;
+    const baseFill = '#fff';
+    const hoverFill = 'hsl(var(--red))';
+    const { svg, path } = createDecrementSVG(baseFill);
     
-    button.append(image);
+    button.append(svg);
     button.classList.add('decrement');
+
+    button.addEventListener('mouseover', () => {
+        path.setAttribute('fill', hoverFill)
+    });
+
+    button.addEventListener('mouseout', () => {
+        path.setAttribute('fill', baseFill)
+    })
     
     return button;
 }
 
 function createIncrementButton(incrementSource) {
     const button = document.createElement('button');
-    const image = document.createElement('img');
-    image.src = incrementSource;
+    const baseFill = '#fff';
+    const hoverFill = 'hsl(var(--red))';
+    const { svg, path } = createIncrementSVG(baseFill);
     
-    button.append(image);
+    button.append(svg);
     button.classList.add('increment');
+
+    button.addEventListener('mouseover', () => {
+        path.setAttribute('fill', hoverFill)
+    });
+
+    button.addEventListener('mouseout', () => {
+        path.setAttribute('fill', baseFill)
+    })
     
     return button;
 }
