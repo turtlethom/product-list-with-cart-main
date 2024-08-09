@@ -1,4 +1,4 @@
-import createATCButton from "../buttons.js";
+import createATCButton from "../util/buttons.js";
 
 /* Create Unique Ids For Each ATC Button */
 let atcButtonId = 0;

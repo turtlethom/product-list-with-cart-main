@@ -86,6 +86,19 @@
     place-items: center;
 }
 
+.prevent-select,
+object,
+img {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.pointer,
+button {
+    cursor: pointer;
+}
+
 /* Custom CSS */
 
 /* Layout Controls */
