@@ -1,7 +1,7 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
 
 /* Buttons For ATC Counter Container */
-function createDecrementButton(decrementSource) {
+function createDecrementButton() {
     const button = document.createElement('button');
     const baseFill = '#fff';
     const hoverFill = 'hsl(var(--red))';
@@ -21,7 +21,7 @@ function createDecrementButton(decrementSource) {
     return button;
 }
 
-function createIncrementButton(incrementSource) {
+function createIncrementButton() {
     const button = document.createElement('button');
     const baseFill = '#fff';
     const hoverFill = 'hsl(var(--red))';
@@ -41,29 +41,33 @@ function createIncrementButton(incrementSource) {
     return button;
 }
 /* ================================== */
-function createCounterATCButton(decrementSrc, incrementSrc) {
+function createCounterATCButton(productId, baseAtcButton) {
     /* Initializing Container/Wrapper & cart count for individual  */
     const container = document.createElement('div');
 
+    /* Selecting Current Product Container & Getting Current Product Amount In Cart */
+    const productCard = document.getElementById(`product-${productId}`);
+    let productInCart = parseInt(productCard.dataset.count);
+
     const counterDisplay = document.createElement('span');
-    counterDisplay.textContent = container.count;
+    counterDisplay.textContent = `${productInCart}`;
 
     /* Decrement Functionality */
-    const decrementBtn = createDecrementButton(decrementSrc);
+    const decrementBtn = createDecrementButton();
     decrementBtn.addEventListener('click', () => {
-        counterDisplay.textContent = container.count -= 1;
-        if (container.count <= 0) {
+        productInCart -= 1;
+        counterDisplay.textContent = productInCart;
+        if (productInCart <= 0) {
             decrementBtn.parentElement.classList.add('hidden');
-            let originalATCButton = decrementBtn.parentElement.parentElement.children[1];
-            originalATCButton.classList.remove('hidden')
-
+            baseAtcButton.classList.remove('hidden')
         }
     });
 
     /* Increment Functionality */
-    const incrementBtn = createIncrementButton(incrementSrc);
+    const incrementBtn = createIncrementButton();
     incrementBtn.addEventListener('click', () => {
-        counterDisplay.textContent = container.count += 1;
+        productInCart += 1;
+        counterDisplay.textContent = productInCart;
     });
 
     container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -73,7 +77,7 @@ function createCounterATCButton(decrementSrc, incrementSrc) {
 }
 
 /* Handling Creation Of ATC <button> Element */
-function createATCButton(source, text) {
+function createATCButton(source, text, productId) {
     const button = document.createElement("button");
 
     const buttonImg = document.createElement("img");
@@ -89,17 +93,19 @@ function createATCButton(source, text) {
     ];
 
     button.append(buttonImg, buttonText);
+    button.id = `base-atc-${productId}`;
     button.classList.add(...buttonClasses);
+
+    /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
+    const baseAtcButton = document.getElementById(button.id);
+    console.log(baseAtcButton)
 
     button.addEventListener('click', () => {
         /* Creating ATC Counter <button> Element */
-        const decrementSVG = "./assets/images/svg/icon-decrement-quantity.svg";
-        const incrementSVG = "./assets/images/svg/icon-increment-quantity.svg";
-        const atcCounterButton = createCounterATCButton(decrementSVG, incrementSVG);
+        const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
         
         /* Appending Counter <button> to parent reference (pictureContent) */
         const pictureContent = button.parentElement;
-        let cartCount = parseInt(pictureContent.parentElement.attributes.cartcount.value);
         pictureContent.append(atcCounterButton);
 
         /* Passing `cartcount` value to counter button's `count` */

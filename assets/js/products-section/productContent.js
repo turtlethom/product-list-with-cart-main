@@ -1,9 +1,7 @@
 import createPictureContent from "./pictureContent.js";
 
-const productCounts = {};
-
 /* Handling Creation Of The Product Description */
-function createProductContent(name, category, price) {
+function createProductContent(name, category, price, productId) {
     /* Creating `name`, `category`, & `price` elements */
     const nameElement = document.createElement('h2');
     const categoryElement = document.createElement('p');
@@ -47,6 +45,7 @@ function createProductContent(name, category, price) {
     const content = document.createElement('div');
     // ORDERING HERE IS DIFFERENT!!!
     content.append(categoryElement, nameElement, priceElement);
+    content.id = `product-${productId}-details`
 
     return content;
 }
@@ -61,17 +60,18 @@ function populateProductSection(jsonData) {
 
         /* Creating Product Container */
         const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
         productCard.id = `product-${productId}`;
-        productCard.setAttribute('cartCount', 0);
+        productCard.classList.add('product-card');
+        productCard.dataset.count = 0;
 
         /* Creating The Picture Content w/ Images & ATC Button */
-        const pictureContent = createPictureContent(image);
+        const pictureContent = createPictureContent(image, productId);
         pictureContent.classList.add('picture-content', 'stacked');
 
         /* Creating Product Content w/ Name, Category, & Price */
-        const productContent = createProductContent(name, category, price);
+        const productContent = createProductContent(name, category, price, productId);
         productContent.classList.add('product-content');
+        productId++;
 
         /* Appending All Elements To Product Card */
         productCard.append(pictureContent, productContent);
@@ -80,8 +80,7 @@ function populateProductSection(jsonData) {
         productGrid.append(productCard);
 
         /* Creating Unique Ids */
-        console.log(productId)
-        productId++;
+        // console.log(productId)
     }
 }
 

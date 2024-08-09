@@ -1,7 +1,5 @@
 import createATCButton from "../util/buttons.js";
 
-/* Create Unique Ids For Each ATC Button */
-let atcButtonId = 0;
 /* Handling Creation Of `Image` Elements */
 function createPicture(image) {
   const picture = document.createElement("picture");
@@ -24,7 +22,7 @@ function createPicture(image) {
   return picture;
 }
 
-function createPictureContent(image) {
+function createPictureContent(image, productId) {
   const content = document.createElement("div");
   /* Creating <picture> Element */
   const picture = createPicture(image);
@@ -32,11 +30,10 @@ function createPictureContent(image) {
 
   /* Creating ATC <button> Element */
   const atcSVG = "./assets/images/svg/icon-add-to-cart.svg";
-  const atcButton = createATCButton(atcSVG, "Add To Cart");
-  atcButtonId++;
-  atcButton.id = `atc-${atcButtonId}`;
+  const atcButton = createATCButton(atcSVG, "Add To Cart", productId);
   
   content.append(picture, atcButton);
+  content.id = `product-${productId}-images`
 
   return content;
 }
