@@ -91,7 +91,13 @@ function createBaseATCButton(source, text, productId) {
   buttonImg.src = source;
 
   const buttonText = document.createTextNode(text);
-  const buttonClasses = ["atc-btn", "fw-600", "text-rose-900", "product-fs"];
+  const buttonClasses = [
+    "atc-btn",
+    "fw-600", 
+    "text-rose-900",
+    "product-fs",
+    'prevent-select',
+    ];
 
   baseATCButton.append(buttonImg, buttonText);
   baseATCButton.id = `base-atc-${productId}`;

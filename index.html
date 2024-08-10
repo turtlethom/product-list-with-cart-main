@@ -16,13 +16,13 @@
 		<main class="layout">
 			<h1 class="fw-700 text-rose-900 main-heading-fs">Desserts</h1>
 			<section id="products-section">
-				<section id="product-grid" class="redhat-normal">
+				<div id="product-grid" class="redhat-normal">
 					<!-- Dynamically Populated Through JS -->
-				</section>
-			
+				</div>
 			</section>
+			
 			<section id="atc-section" class="bg-rose-50">
-				<h3 class="text-red sub-heading-fs">Your Cart (<!-- Quantity -->0)</h3>
+				<h3 id="atc-heading" class="text-red sub-heading-fs">Your Cart (<!-- Quantity -->0)</h3>
 					<div id="user-cart">
 						<!-- <div class="centered empty-cart">
 							<img src="./assets/images/svg/illustration-empty-cart.svg" alt="illustration-empty-cart">
@@ -44,7 +44,14 @@
 							<hr>
 							<div class="order">
 								<span class="order-label">Order Total</span>
-								<span class="order-total">$5.50</span>
+								<span class="order-total sub-heading-fs fw-700">$5.50</span>
+								<div class="cn-message bg-rose-100">
+									<img src="./assets/images/svg/icon-carbon-neutral.svg" alt="">
+									<span>This is a <strong>carbon-neutral</strong> delivery</span>
+								</div>
+								<button class="confirm-button">
+									Confirm Order
+								</button>
 							</div>
 						 </div>
 					</div>

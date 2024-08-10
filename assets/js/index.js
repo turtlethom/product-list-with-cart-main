@@ -1,4 +1,5 @@
 import populateProductSection from "./products-section/productContent.js";
+import populateATCSection from "./atc-section/emptyCart.js";
 
 /* Retrieving JSON data for products via Fetch API */
 function retrieveProductInfo(filepath) {
@@ -12,6 +13,7 @@ function retrieveProductInfo(filepath) {
     .then((data) => {
       // console.log(data);
       populateProductSection(data);
+      // populateATCSection();
     })
     .catch((err) => {
       console.error("Error with fetching data: ", err);

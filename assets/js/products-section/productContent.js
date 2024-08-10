@@ -22,6 +22,7 @@ function createProductContent(name, category, price, productId) {
         'text-rose-900',
         'fw-500',
         'product-fs',
+        'prevent-select',
         
     ];
     const categoryClasses = [
@@ -29,12 +30,14 @@ function createProductContent(name, category, price, productId) {
         'text-rose-500',
         'fw-600',
         'product-fs',
+        'prevent-select',
     ];
     const priceClasses = [
         'product-price',
         'text-red',
         'fw-700',
         'product-fs',
+        'prevent-select',
     ];
 
     nameElement.classList.add(...nameClasses);
@@ -71,6 +74,7 @@ function populateProductSection(jsonData) {
         /* Creating Product Content w/ Name, Category, & Price */
         const productContent = createProductContent(name, category, price, productId);
         productContent.classList.add('product-content');
+        /* Creating Unique Ids */
         productId++;
 
         /* Appending All Elements To Product Card */
@@ -79,7 +83,6 @@ function populateProductSection(jsonData) {
         /* Appending All Elements To Product Section */
         productGrid.append(productCard);
 
-        /* Creating Unique Ids */
         // console.log(productId)
     }
 }
