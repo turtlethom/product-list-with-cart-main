@@ -4,35 +4,34 @@ import { createRemoveIconSVG } from "../util/svg.js";
 function updateCartHeading(count) {
     const cartHeading = document.getElementById('atc-heading');
     let inCart = parseInt(cartHeading.dataset.inCart) + count;
+    console.log(inCart)
     cartHeading.dataset.inCart = inCart;
     cartHeading.textContent = `Your Cart (${inCart})`;
 }
 
-function createActiveCart(productId) {
-    let activeCart = document.getElementById('active-cart');
-    /* If Active Cart Does Not Exist, Create It */
-    if (activeCart === null) {
-        activeCart = document.createElement('div');
-        content.classList.add('active-cart');
-    }
+function createActiveCart() {
+    const userCart = document.getElementById('user-cart');
+    // const cartHeading = document.getElementById('atc-heading');
+    // cartHeading.dataset.inCart = 1;
+    // cartHeading.textContent = `Your Cart(${cartHeading.dataset.inCart})`;
     
-    handleCurrentSelection(activeCart, productId);
+    const activeCart = document.createElement('div');
+    activeCart.classList.add('active-cart');
+    userCart.append(activeCart);
 
-    /* Appending Remove Button For Selection */
-    const removeButton = document.createElement('button');
-    const { removeIcon, path } = createRemoveIconSVG('#CAAFA7');
-    removeButton.append(removeIcon);
-    removeButton.classList.add('remove-btn');
+    return activeCart;
+
 }
 
-function handleCurrentSelection(activeCart, productId) {
+function handleCurrentSelection(productId, activeCart) {
     /* Grabbing Element With Product Information */
     const productDetails = document.getElementById(`product-${productId}-details`);
-    /* Parsing Strings For Calculating Totals */
-    const parsedAmount = parseInt(selection.dataset.count);
-    const parsedPrice = parseInt(productDetails.children[2].slice(1));
-    /* If Selection Does Not Exist, Create Instance */
+    /* Selecting Remove Button To Insert Adjacent HTML */
+    const removeButton = document.createElement('button');
+    /* Looking For Existing Selection */
     let selection = document.getElementById(`selection-${productId}`);
+
+    /* If Selection Does Not Exist, Create Instance */
     if (selection === null) {
         /* Creating Selection Element & Appending It To Active Cart */
         selection = document.createElement('div');
@@ -40,22 +39,37 @@ function handleCurrentSelection(activeCart, productId) {
         selection.classList.add('cart-item');
         selection.dataset.count = 1;
 
+        /* Parsing Strings For Calculating Totals */
+        const parsedAmount = parseInt(selection.dataset.count);
+        const parsedPrice = parseFloat(productDetails.children[2].textContent.slice(1)).toFixed(2);
+
         const unitTitle = document.createElement('h4');
         unitTitle.textContent = productDetails.children[1].textContent;
         unitTitle.classList.add(
             'unit-title',
-            'text-rose-500',
+            'text-rose-900',
         );
         /* Adding Unit (Product) Title */
         selection.append(unitTitle);
-        activeCart.append(selection);
-        /* Handling The Details Of The Selected Individual Product */
-        createItemDetails(parsedAmount, parsedPrice);
 
-        displayOrderTotal();
+        /* Handling The Details Of The Selected Individual Product */
+        const itemDetails = createItemDetails(activeCart, parsedAmount, parsedPrice);
+        selection.append(itemDetails);
+        
+        activeCart.append(selection);
+
+
+        /* Appending Remove Button For Selection */
+        const removeButton = document.createElement('button');
+        const { svg: removeIcon } = createRemoveIconSVG('#CAAFA7');
+        removeButton.appendChild(removeIcon);
+        removeButton.classList.add('remove-btn');
+        selection.append(removeButton)
+
+        // displayOrderTotal();
 
         /* Displaying Message And Confirm Button */
-        displayCartFooter();
+        // displayCartFooter();
     }
 
 
@@ -63,7 +77,7 @@ function handleCurrentSelection(activeCart, productId) {
 }
 
 /* Creating ItemDetails for SINGLE Cart Item */
-function createItemDetails(amount, price) {
+function createItemDetails(activeCart, amount, price) {
 
     const cartItemDetails = document.createElement('div');
     cartItemDetails.classList.add('cart-item-details');
@@ -83,20 +97,25 @@ function createItemDetails(amount, price) {
         'unit-price', 
         'text-rose-500',
     );
-    unitPrice.textContent(`@&nbsp;$${price.toFixed(2)}`);
+    unitPrice.textContent =`$${price}`;
 
     /* Total Cost Of Buying Selected Item(s) */
-    const selectionTotal = document.createElement('span');
-    selectionTotal.classList.add(
+    const unitTotal = document.createElement('span');
+    console.log(unitTotal)
+    unitTotal.classList.add(
         'unit-total',
         'text-rose-500',
         'fw-700',
     );
     /* Using Parsed Amount & Price To Calculate Selection Total */
-    const calculatedProduct = (amount * price).toFixed();
-    selectionTotal.textContent(`${selectionTotal}`);
+    const calculatedProduct = (amount * price).toFixed(2);
+    unitTotal.textContent = `$${calculatedProduct}`;
 
-    cartItemDetails.add(amount, price, calculatedProduct);
+    cartItemDetails.appendChild(unitAmount);
+    cartItemDetails.appendChild(unitPrice);
+    cartItemDetails.appendChild(unitTotal);
+
+    return cartItemDetails;
 }
 
 /* Calculating The Total Items In The Cart And Displaying It */
@@ -135,4 +154,4 @@ function displayCartFooter() {
     cfButton.textContent = "Confirm Order";
 }
 
-export { updateCartHeading }
+export { createActiveCart, updateCartHeading, handleCurrentSelection }

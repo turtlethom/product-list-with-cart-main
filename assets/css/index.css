@@ -244,7 +244,8 @@ hr {
     font-size: 1rem;
 }
 .remove-btn {
-    border-radius: 1em;
+    display: flex;
+    border-radius: 2em;
     padding: 0.2rem;
     border: 1px solid hsl(var(--rose-500));
     background-color: white;

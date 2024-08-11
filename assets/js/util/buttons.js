@@ -1,5 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
-import { updateCartHeading } from "../atc-section/activeCart.js";
+import { createActiveCart, updateCartHeading, handleCurrentSelection } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -73,7 +73,9 @@ function createCounterATCButton(productId, baseAtcButton) {
       baseAtcButton.classList.remove("hidden");
       productPicture.classList.remove('selected');
     }
-    
+
+    const cartAmount = document.getElementById('atc-heading');
+    updateCartHeading(-1);
   });
 
   /* Increment Functionality */
@@ -84,6 +86,7 @@ function createCounterATCButton(productId, baseAtcButton) {
     counterDisplay.textContent = productInCart;
     // Updating New Cart Count On Product Card Instance Itself
     productCard.dataset.count = productInCart;
+    updateCartHeading(1)
   });
 
   container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -135,6 +138,16 @@ function createBaseATCButton(source, text, productId) {
     /* Displaying Active Cart Content / Hiding Empty Cart Content */
     const emptyCart = document.getElementById('empty-cart');
     emptyCart.classList.add('hidden');
+
+    // const cartAmount = document.getElementById('atc-heading').dataset.inCart;
+
+    let activeCart = document.getElementById('active-cart');
+    console.log(activeCart)
+    /* If Active Cart Does Not Exist, Create It */
+    if (activeCart === null) {
+      activeCart = createActiveCart();
+    }
+    handleCurrentSelection(productId, activeCart);
   });
 
   return baseATCButton;
