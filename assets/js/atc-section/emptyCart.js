@@ -1,6 +1,13 @@
-function createEmptyCartContent() {
+function createEmptyCartContent(parent) {
     /* Creating Empty/Default Cart */
     const content = document.createElement('div');
+    content.id = 'empty-cart';
+    content.classList.add(
+        'centered',
+        'redhat-normal', 
+        'fw-600',
+        'text-rose-500'
+    );
 
     const emptyCartImage = document.createElement('img');
     emptyCartImage.src = './assets/images/svg/illustration-empty-cart.svg';
@@ -9,24 +16,8 @@ function createEmptyCartContent() {
     emptyCartMessage.textContent = "Your added items will appear here";
 
     content.append(emptyCartImage, emptyCartMessage);
-    content.classList.add('centered', 'empty-cart');
 
-    /* Selecting ATC-SECTION & ADDING INITIAL DATA  */
-    const atcSection = document.getElementById('atc-section');
-    atcSection.dataset.itemsInCart = 0;
-    atcSection.classList.add('centered');
-
-    /* Selecting & Updating Heading */
-    
-    return content;
+    parent.append(content);
 }
 
-function populateATCSection() {
-    const cartSection = document.getElementById('user-cart');
-    const emptyCart = createEmptyCartContent();
-
-    cartSection.append(emptyCart);
-
-}
-
-export default populateATCSection;
+export default createEmptyCartContent;

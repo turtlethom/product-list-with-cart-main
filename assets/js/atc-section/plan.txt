@@ -1,0 +1,10 @@
+atcButton
+...
+if cart not created yet,
+--> Display active Cart
+
+if item not created yet,
+--> Grab product-{productId}-details (category, name, price)
+--> amount.textContent = 1;
+
+counter

@@ -1,4 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
+import { updateCartHeading } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -51,6 +52,11 @@ function createCounterATCButton(productId, baseAtcButton) {
   /* Parsing Count String Into Int */
   let productInCart = parseInt(productCard.dataset.count); // 0
 
+  /* Selecting Image Of Product Instace */
+  const productPicture = document.getElementById(`img-${productId}`);
+  productPicture.classList.add('selected');
+  
+
   counterDisplay.textContent = `${productInCart}`;
 
   /* Decrement Functionality */
@@ -65,7 +71,9 @@ function createCounterATCButton(productId, baseAtcButton) {
     if (productInCart <= 0) {
       decrementBtn.parentElement.remove();
       baseAtcButton.classList.remove("hidden");
+      productPicture.classList.remove('selected');
     }
+    
   });
 
   /* Increment Functionality */
@@ -122,6 +130,11 @@ function createBaseATCButton(source, text, productId) {
 
     /* Hiding Initial ATC Button */
     baseATCButton.classList.add("hidden");
+
+    /* ======================== */
+    /* Displaying Active Cart Content / Hiding Empty Cart Content */
+    const emptyCart = document.getElementById('empty-cart');
+    emptyCart.classList.add('hidden');
   });
 
   return baseATCButton;

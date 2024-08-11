@@ -47,4 +47,4 @@ function createRemoveIconSVG(baseFill) {
     return { svg, path };
 }
 
-export { createDecrementSVG, createIncrementSVG };
+export { createDecrementSVG, createIncrementSVG, createRemoveIconSVG };

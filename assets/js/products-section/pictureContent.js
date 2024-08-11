@@ -1,7 +1,7 @@
 import createBaseATCButton from "../util/buttons.js";
 
 /* Handling Creation Of `Image` Elements */
-function createPicture(image) {
+function createPicture(image, productId) {
   const picture = document.createElement("picture");
   // Setting up picture srcsets for all viewports
   const mobileSource = document.createElement("source");
@@ -18,6 +18,7 @@ function createPicture(image) {
 
   // Appending all image sources to new `<picture>`
   picture.append(mobileSource, tabletSource, defaultImg);
+  picture.id = `img-${productId}`
 
   return picture;
 }
@@ -25,7 +26,7 @@ function createPicture(image) {
 function createPictureContent(image, productId) {
   const content = document.createElement("div");
   /* Creating <picture> Element */
-  const picture = createPicture(image);
+  const picture = createPicture(image, productId);
   picture.classList.add("product-picture");
 
   /* Creating ATC <button> Element */

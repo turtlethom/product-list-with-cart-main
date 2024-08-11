@@ -209,9 +209,13 @@ hr {
 }
 
 #atc-section > h3 { justify-self: start; }
-.empty-cart { 
+#empty-cart { 
     gap: 1.5rem;
     margin-top: 1rem;
+}
+
+#empty-cart > p {
+    text-wrap: nowrap;
 }
 
 .cart-item {
@@ -297,6 +301,11 @@ hr {
 
 .hidden {
     display: none;
+}
+
+.selected {
+    border: 3px solid hsl(var(--red));
+    border-radius: 1em;
 }
 
 .atc-btn:hover {
