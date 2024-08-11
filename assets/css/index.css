@@ -240,9 +240,15 @@ hr {
     gap: 0.5rem;
 }
 
-.cart-item-details:nth-child(2)::first-letter {
-    font-size: 1rem;
+.unit-amount {
+    padding-right: 0.75rem;
 }
+
+.unit-price:before {
+    content: '@ ';
+    font-size: 0.75rem;
+}
+
 .remove-btn {
     display: flex;
     border-radius: 2em;
