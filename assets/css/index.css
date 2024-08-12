@@ -270,19 +270,20 @@ hr {
 }
 
 .order > * {
+    padding-top: 1rem;
     font-family: var(--redhat-font);
 }
 
-.order-label { grid-area: label; }
-.order-total { grid-area: total; }
+#order-label { grid-area: label; }
+#order-total { grid-area: total; }
 .cn-message { grid-area: message; }
 .confirm-button {grid-area: button;}
 
-.order-label {
+#order-label {
     text-align: left;
 }
 
-.order-total {
+#order-total {
     text-align: right;
 }
 
