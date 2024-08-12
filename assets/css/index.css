@@ -290,7 +290,10 @@ hr {
     justify-self: center;
     display: flex;
     gap: 1rem;
-    inline-size: max-content;
+    justify-content: center;
+    margin-inline: 1rem;
+    inline-size: 100%;
+    text-wrap: nowrap;
     padding: 1rem;
     border-radius: 1em;
 }

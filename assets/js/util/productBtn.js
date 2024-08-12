@@ -1,5 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
-import { createActiveCart, updateCartHeading, handleCurrentSelection, createOrderDisplay } from "../atc-section/activeCart.js";
+import { createActiveCart, handleCurrentSelection, createOrderDisplay } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -76,15 +76,18 @@ function createCounterATCButton(productId, baseAtcButton) {
       headingCount -= 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      console.log(document.getElementById('atc-heading').dataset.count)
+      // console.log(document.getElementById('atc-heading').dataset.count)
 
+      /* Reset Selection */
     if (productInCart <= 0) {
       decrementBtn.parentElement.remove();
       baseAtcButton.classList.remove("hidden");
       productPicture.classList.remove('selected');
-      document.getElementById(`selection-${productId}`).remove()
+      document.getElementById(`selection-${productId}`).remove();
+      document.getElementById(`divider-${productId}`).remove();
     }
 
+    /* Reset Active Cart To Empty Cart*/
     if (!headingCount) {
       document.getElementById('empty-cart').classList.remove('hidden');
       document.getElementById('active-cart').remove();
@@ -107,7 +110,7 @@ function createCounterATCButton(productId, baseAtcButton) {
       headingCount += 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      console.log(document.getElementById('atc-heading').dataset.count)
+      // console.log(document.getElementById('atc-heading').dataset.count)
   });
 
   container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -146,7 +149,7 @@ function createBaseATCButton(source, text, productId) {
       headingCount += 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      console.log(document.getElementById('atc-heading').dataset.count)
+      // console.log(document.getElementById('atc-heading').dataset.count)
 
       
       
@@ -181,7 +184,7 @@ function createBaseATCButton(source, text, productId) {
       activeCart.append(order);
     }
     handleCurrentSelection(productId, activeCart);
-    console.log(activeCart)
+    // console.log(activeCart)
 
   });
 

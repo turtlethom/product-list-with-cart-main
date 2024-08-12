@@ -1,11 +1,6 @@
 import { createRemoveIconSVG } from "../util/svg.js";
 import { createConfirmButton } from "./cartBtn.js";
 
-/* Update The TOTAL Items In Cart And Display It */
-function updateCartHeading() {
-    
-}
-
 function createActiveCart() {
     const cartWrapper = document.getElementById('cart-wrapper');
     const activeCart = document.createElement('div');
@@ -23,7 +18,6 @@ function handleCurrentSelection(productId, activeCart) {
     let selection = document.getElementById(`selection-${productId}`);
     /* If Selection Does Not Exist, Create Instance */
     if (!selection) {
-        console.log(!selection)
         /* Creating Selection Element & Appending It To Active Cart */
         selection = document.createElement('div');
         selection.id = `selection-${productId}`;
@@ -38,27 +32,25 @@ function handleCurrentSelection(productId, activeCart) {
         unitTitle.classList.add(
             'unit-title',
             'text-rose-900',
+            'redhat-normal'
         );
         /* Adding Unit (Product) Title */
         selection.append(unitTitle);
-
         /* Handling The Details Of The Selected Individual Product */
-        const itemDetails = createItemDetails(activeCart, parsedAmount, parsedPrice);
+        const itemDetails = createItemDetails(parsedAmount, parsedPrice);
         selection.append(itemDetails);
-        
         // activeCart.insertAdjacentElement('beforebegin', selection);
         activeCart.insertAdjacentElement('afterbegin', selection);
-
+        /* Creating <hr> Element For Visual Separator Of Items */
+        const hr = document.createElement('hr');
+        hr.id = `divider-${productId}`;
+        selection.insertAdjacentElement('afterend', hr);
         /* Appending Remove Button For Selection */
         const removeButton = document.createElement('button');
         const { svg: removeIcon } = createRemoveIconSVG('#CAAFA7');
         removeButton.appendChild(removeIcon);
         removeButton.classList.add('remove-btn');
         selection.append(removeButton);
-
-        // const cartHeading = document.getElementById('atc-heading');
-        // cartHeading.dataset.inCart = 1;
-        // cartHeading.textContent = `Your Cart(${cartHeading.dataset.inCart})`;
     }
 
 
@@ -66,7 +58,7 @@ function handleCurrentSelection(productId, activeCart) {
 }
 
 /* Creating ItemDetails for SINGLE Cart Item */
-function createItemDetails(activeCart, amount, price) {
+function createItemDetails(amount, price) {
 
     const cartItemDetails = document.createElement('div');
     cartItemDetails.classList.add('cart-item-details');
@@ -75,6 +67,7 @@ function createItemDetails(activeCart, amount, price) {
     const unitAmount = document.createElement('span');
     unitAmount.classList.add(
         'unit-amount',
+        'redhat-normal',
         'text-red',
         'fw-700',
     );
@@ -83,6 +76,7 @@ function createItemDetails(activeCart, amount, price) {
     /* Price For Buying The Selected Item */
     const unitPrice = document.createElement('span');
     unitPrice.classList.add(
+        'redhat-normal',
         'unit-price', 
         'text-rose-500',
     );
@@ -90,8 +84,9 @@ function createItemDetails(activeCart, amount, price) {
 
     /* Total Cost Of Buying Selected Item(s) */
     const unitTotal = document.createElement('span');
-    console.log(unitTotal)
+    // console.log(unitTotal);
     unitTotal.classList.add(
+        'redhat-normal',
         'unit-total',
         'text-rose-500',
         'fw-700',
@@ -114,7 +109,10 @@ function createCartOrder() {
 
     const orderLabel = document.createElement('span');
     orderLabel.textContent = "Order Total";
-    orderLabel.classList.add('order-label');
+    orderLabel.classList.add(
+        'order-label',
+        'redhat-normal',
+    );
 
     const orderTotal = document.createElement('span');
     orderTotal.textContent = "$5.50";
@@ -133,6 +131,7 @@ function createCartMessage() {
     const cnContainer = document.createElement('div');
     cnContainer.classList.add(
         'cn-message',
+        'redhat-normal',
         'bg-rose-100',
     );
 
@@ -147,7 +146,7 @@ function createCartMessage() {
 
     cnContainer.append(cnImage, cnText);
 
-    console.log(cnContainer)
+    // console.log(cnContainer)
 
     return cnContainer;
 }
@@ -162,7 +161,6 @@ function createOrderDisplay() {
 
 export { 
     createActiveCart,
-    updateCartHeading,
     handleCurrentSelection, 
     createOrderDisplay
 }
