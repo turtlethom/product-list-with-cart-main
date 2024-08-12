@@ -6,4 +6,8 @@ function createConfirmButton() {
     return confirmButton;
 }
 
-export { createConfirmButton };
+function createRemoveButton() {
+    
+}
+
+export { createConfirmButton, createRemoveButton };

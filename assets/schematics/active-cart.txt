@@ -2,9 +2,9 @@
     <div id="selection-4" class="cart-item" data-count="1">
     <h4 class="unit-title text-rose-900">Classic Tiramisu</h4>
     <div id="details-4" class="cart-item-details">
-        <span class="unit-amount redhat-normal text-red fw-700">1x</span>
-        <span class="unit-price redhat-normal text-rose-500">@&nbsp;$5.50</span>
-        <span class="unit-total redhat-normal text-rose-500 fw-700">$5.50</span>
+        <span id="unit-amount" class="amount redhat-normal text-red fw-700">1x</span>
+        <span id="unit-price" class="price redhat-normal text-rose-500">@&nbsp;$5.50</span>
+        <span id="unit-total" class="total redhat-normal text-rose-500 fw-700">$5.50</span>
     </div>
     <button class="remove-btn">
         <img src="./assets/images/svg/icon-remove-item.svg" alt="">

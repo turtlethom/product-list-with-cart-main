@@ -37,7 +37,7 @@ function handleCurrentSelection(productId, activeCart) {
         /* Adding Unit (Product) Title */
         selection.append(unitTitle);
         /* Handling The Details Of The Selected Individual Product */
-        const itemDetails = createItemDetails(parsedAmount, parsedPrice);
+        const itemDetails = createItemDetails(parsedAmount, parsedPrice, productId);
         selection.append(itemDetails);
         // activeCart.insertAdjacentElement('beforebegin', selection);
         activeCart.insertAdjacentElement('afterbegin', selection);
@@ -58,15 +58,16 @@ function handleCurrentSelection(productId, activeCart) {
 }
 
 /* Creating ItemDetails for SINGLE Cart Item */
-function createItemDetails(amount, price) {
+function createItemDetails(amount, price, id) {
 
     const cartItemDetails = document.createElement('div');
     cartItemDetails.classList.add('cart-item-details');
 
     /* Amount Of Selected Item In Cart */
     const unitAmount = document.createElement('span');
+    unitAmount.id = `unit-amount-${id}`;
     unitAmount.classList.add(
-        'unit-amount',
+        'amount',
         'redhat-normal',
         'text-red',
         'fw-700',
@@ -75,19 +76,20 @@ function createItemDetails(amount, price) {
 
     /* Price For Buying The Selected Item */
     const unitPrice = document.createElement('span');
+    unitPrice.id = `unit-price-${id}`
     unitPrice.classList.add(
+        'price',
         'redhat-normal',
-        'unit-price', 
         'text-rose-500',
     );
     unitPrice.textContent =`$${price}`;
 
     /* Total Cost Of Buying Selected Item(s) */
     const unitTotal = document.createElement('span');
-    // console.log(unitTotal);
+    unitTotal.id = `unit-total-${id}`,
     unitTotal.classList.add(
+        'total',
         'redhat-normal',
-        'unit-total',
         'text-rose-500',
         'fw-700',
     );
@@ -102,7 +104,11 @@ function createItemDetails(amount, price) {
     return cartItemDetails;
 }
 
-/* Calculating The Total Items In The Cart And Displaying It */
+function calculateItemDetails() {
+    
+}
+
+/* Displaying Total Items In Cart & Cost */
 function createCartOrder() {
     const calculatedOrder = document.createElement('div');
     calculatedOrder.classList.add('order');

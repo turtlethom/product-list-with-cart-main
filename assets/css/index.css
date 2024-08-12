@@ -240,11 +240,11 @@ hr {
     gap: 0.5rem;
 }
 
-.unit-amount {
+.amount {
     padding-right: 0.75rem;
 }
 
-.unit-price:before {
+.price:before {
     content: '@ ';
     font-size: 0.75rem;
 }
