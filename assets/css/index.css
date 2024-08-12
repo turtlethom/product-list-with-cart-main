@@ -334,7 +334,7 @@ hr {
 .attribution a { color: hsl(228, 45%, 44%); }
 
 /* Handling Sizing For Smaller Viewports */
-@media (max-width: 1024px) {
+@media (max-width: 1224px) {
     .layout {
         margin: 2rem;
         grid-template-columns: repeat(2, 1fr);

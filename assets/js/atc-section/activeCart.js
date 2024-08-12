@@ -1,23 +1,16 @@
 import { createRemoveIconSVG } from "../util/svg.js";
+import { createConfirmButton } from "./cartBtn.js";
 
 /* Update The TOTAL Items In Cart And Display It */
-function updateCartHeading(count) {
-    const cartHeading = document.getElementById('atc-heading');
-    let inCart = parseInt(cartHeading.dataset.inCart) + count;
-    console.log(inCart)
-    cartHeading.dataset.inCart = inCart;
-    cartHeading.textContent = `Your Cart (${inCart})`;
+function updateCartHeading() {
+    
 }
 
 function createActiveCart() {
-    const userCart = document.getElementById('user-cart');
-    // const cartHeading = document.getElementById('atc-heading');
-    // cartHeading.dataset.inCart = 1;
-    // cartHeading.textContent = `Your Cart(${cartHeading.dataset.inCart})`;
-    
+    const cartWrapper = document.getElementById('cart-wrapper');
     const activeCart = document.createElement('div');
     activeCart.classList.add('active-cart');
-    userCart.append(activeCart);
+    cartWrapper.append(activeCart);
 
     return activeCart;
 
@@ -26,19 +19,16 @@ function createActiveCart() {
 function handleCurrentSelection(productId, activeCart) {
     /* Grabbing Element With Product Information */
     const productDetails = document.getElementById(`product-${productId}-details`);
-    /* Selecting Remove Button To Insert Adjacent HTML */
-    const removeButton = document.createElement('button');
     /* Looking For Existing Selection */
     let selection = document.getElementById(`selection-${productId}`);
-
     /* If Selection Does Not Exist, Create Instance */
-    if (selection === null) {
+    if (!selection) {
+        console.log(!selection)
         /* Creating Selection Element & Appending It To Active Cart */
         selection = document.createElement('div');
         selection.id = `selection-${productId}`;
         selection.classList.add('cart-item');
         selection.dataset.count = 1;
-
         /* Parsing Strings For Calculating Totals */
         const parsedAmount = parseInt(selection.dataset.count);
         const parsedPrice = parseFloat(productDetails.children[2].textContent.slice(1)).toFixed(2);
@@ -56,20 +46,18 @@ function handleCurrentSelection(productId, activeCart) {
         const itemDetails = createItemDetails(activeCart, parsedAmount, parsedPrice);
         selection.append(itemDetails);
         
-        activeCart.append(selection);
-
+        activeCart.insertAdjacentElement('beforebegin', selection);
 
         /* Appending Remove Button For Selection */
         const removeButton = document.createElement('button');
         const { svg: removeIcon } = createRemoveIconSVG('#CAAFA7');
         removeButton.appendChild(removeIcon);
         removeButton.classList.add('remove-btn');
-        selection.append(removeButton)
+        selection.append(removeButton);
 
-        // displayOrderTotal();
-
-        /* Displaying Message And Confirm Button */
-        // displayCartFooter();
+        // const cartHeading = document.getElementById('atc-heading');
+        // cartHeading.dataset.inCart = 1;
+        // cartHeading.textContent = `Your Cart(${cartHeading.dataset.inCart})`;
     }
 
 
@@ -119,7 +107,7 @@ function createItemDetails(activeCart, amount, price) {
 }
 
 /* Calculating The Total Items In The Cart And Displaying It */
-function displayOrderTotal() {
+function createCartOrder() {
     const calculatedOrder = document.createElement('div');
     calculatedOrder.classList.add('order');
 
@@ -129,29 +117,51 @@ function displayOrderTotal() {
 
     const orderTotal = document.createElement('span');
     orderTotal.textContent = "$5.50";
-    orderTotal.classList.add('order-total');
+    orderTotal.classList.add(
+        'order-total',
+        'sub-heading-fs',
+        'fw-700'
+    );
 
     calculatedOrder.append(orderLabel, orderTotal);
     return calculatedOrder;
 }
 
 /* Displaying Eco-Friendly Message And Confirm Button */
-function displayCartFooter() {
+function createCartMessage() {
     const cnContainer = document.createElement('div');
-    cnContainer.classList.add('cn-message');
+    cnContainer.classList.add(
+        'cn-message',
+        'bg-rose-100',
+    );
 
     const cnImage = document.createElement('img');
     cnImage.src = './assets/images/svg/icon-carbon-neutral.svg';
     cnImage.alt = 'carbon-neutral';
 
     const cnText = document.createElement('span');
-    cnText.append('This is a <strong>carbon-neutral</strong> delivery');
+    const bold = document.createElement('strong');
+    bold.textContent = 'carbon-neutral';
+    cnText.append('This is a ', bold, ' delivery');
 
     cnContainer.append(cnImage, cnText);
 
-    const cfButton = document.createElement('button');
-    cfButton.classList.add('confirm-button');
-    cfButton.textContent = "Confirm Order";
+    console.log(cnContainer)
+
+    return cnContainer;
 }
 
-export { createActiveCart, updateCartHeading, handleCurrentSelection }
+function createOrderDisplay() {
+    const order = createCartOrder();
+    const cartMessage = createCartMessage();
+    const confirmButton = createConfirmButton();
+    order.append(cartMessage, confirmButton);
+    return order;
+}
+
+export { 
+    createActiveCart,
+    updateCartHeading,
+    handleCurrentSelection, 
+    createOrderDisplay
+}

@@ -1,4 +1,4 @@
-import createBaseATCButton from "../util/buttons.js";
+import createBaseATCButton from "../util/productBtn.js";
 
 /* Handling Creation Of `Image` Elements */
 function createPicture(image, productId) {
