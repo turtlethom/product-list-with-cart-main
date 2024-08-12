@@ -9,7 +9,7 @@ function updateCartHeading() {
 function createActiveCart() {
     const cartWrapper = document.getElementById('cart-wrapper');
     const activeCart = document.createElement('div');
-    activeCart.classList.add('active-cart');
+    activeCart.id = 'active-cart'
     cartWrapper.append(activeCart);
 
     return activeCart;
@@ -46,7 +46,8 @@ function handleCurrentSelection(productId, activeCart) {
         const itemDetails = createItemDetails(activeCart, parsedAmount, parsedPrice);
         selection.append(itemDetails);
         
-        activeCart.insertAdjacentElement('beforebegin', selection);
+        // activeCart.insertAdjacentElement('beforebegin', selection);
+        activeCart.insertAdjacentElement('afterbegin', selection);
 
         /* Appending Remove Button For Selection */
         const removeButton = document.createElement('button');

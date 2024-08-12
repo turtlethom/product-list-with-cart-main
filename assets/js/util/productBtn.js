@@ -68,7 +68,9 @@ function createCounterATCButton(productId, baseAtcButton) {
     // Updating New Cart Count On Product Card Instance Itself
     productCard.dataset.count = productInCart;
     // Updating Selection Count
-    document.getElementById(`selection-${productId}`).dataset.count--;
+    if (document.getElementById(`selection-${productId}`)) {
+      document.getElementById(`selection-${productId}`).dataset.count--;
+    }
     // Updating ATC Heading Count & Text Content
     let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
       headingCount -= 1;
@@ -80,6 +82,12 @@ function createCounterATCButton(productId, baseAtcButton) {
       decrementBtn.parentElement.remove();
       baseAtcButton.classList.remove("hidden");
       productPicture.classList.remove('selected');
+      document.getElementById(`selection-${productId}`).remove()
+    }
+
+    if (!headingCount) {
+      document.getElementById('empty-cart').classList.remove('hidden');
+      document.getElementById('active-cart').remove();
     }
 
   });
