@@ -121,13 +121,13 @@ function calculateSelection(id, num) {
 function calculateCartPrice(id, action) {
     if (document.getElementById(`order-total`)) {
         let cartTotal = parseFloat(document.getElementById('order-total').textContent.slice(1));
-        let unitPrice = parseFloat(document.getElementById(`unit-price-${id}`).textContent.slice(1));
+        let priceListed = parseFloat(document.getElementById(`product-${id}-details`).children[2].textContent.slice(1));
         switch (action) {
             case "add":
-                cartTotal += parseFloat(unitPrice);
+                cartTotal += parseFloat(priceListed);
                 break;
             case "subtract":
-                cartTotal -= parseFloat(unitPrice);
+                cartTotal -= parseFloat(priceListed);
                 break;
             default:
                 return;

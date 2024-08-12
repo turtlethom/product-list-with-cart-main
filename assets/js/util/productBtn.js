@@ -53,7 +53,6 @@ function createCounterATCButton(productId, baseAtcButton) {
   let individualProductAdded = parseInt(productCard.dataset.count);
   /* Grabbing Current Selection */
   const currSelection = document.getElementById(`selection-${productId}`);
-  /* Grabbing ATC Heading For Total Items In Cart */
 
   /* Selecting Image Of Product Instace */
   const productPicture = document.getElementById(`img-${productId}`);
@@ -88,6 +87,9 @@ function createCounterATCButton(productId, baseAtcButton) {
       document.getElementById(`selection-${productId}`).remove();
       document.getElementById(`divider-${productId}`).remove();
     }
+    /* Decrementing Amount & Unit Price / Updating Total Of Selection */
+    calculateSelection(productId, -1);
+    calculateCartPrice(productId, "subtract");
 
     /* Reset Active Cart To Empty Cart*/
     if (!headingCount) {
@@ -95,9 +97,6 @@ function createCounterATCButton(productId, baseAtcButton) {
       document.getElementById('active-cart').remove();
     }
 
-    /* Decrementing Amount & Unit Price / Updating Total Of Selection */
-    const selectionTotal = calculateSelection(productId, -1);
-    calculateCartPrice(productId, "subtract");
   });
 
   /* Increment Functionality */
@@ -117,7 +116,7 @@ function createCounterATCButton(productId, baseAtcButton) {
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
     
     /* Incrementing Amount & Unit Price / Updating Total Of Selection */
-    const selectionTotal = calculateSelection(productId, 1);
+    calculateSelection(productId, 1);
     calculateCartPrice(productId, "add");
   });
 
