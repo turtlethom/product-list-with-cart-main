@@ -52,9 +52,6 @@ function handleCurrentSelection(productId, activeCart) {
         removeButton.classList.add('remove-btn');
         selection.append(removeButton);
     }
-
-
-
 }
 
 /* Creating ItemDetails for SINGLE Cart Item */
@@ -72,7 +69,7 @@ function createItemDetails(amount, price, id) {
         'text-red',
         'fw-700',
     );
-    unitAmount.textContent = `${amount}x`;
+    unitAmount.textContent = `x${amount}`;
 
     /* Price For Buying The Selected Item */
     const unitPrice = document.createElement('span');
@@ -94,8 +91,7 @@ function createItemDetails(amount, price, id) {
         'fw-700',
     );
     /* Using Parsed Amount & Price To Calculate Selection Total */
-    const calculatedProduct = (amount * price).toFixed(2);
-    unitTotal.textContent = `$${calculatedProduct}`;
+    unitTotal.textContent = `$${price}`
 
     cartItemDetails.appendChild(unitAmount);
     cartItemDetails.appendChild(unitPrice);
@@ -104,8 +100,27 @@ function createItemDetails(amount, price, id) {
     return cartItemDetails;
 }
 
-function calculateItemDetails() {
+/* Calculating Total For Individual Selection */
+function calculateSelection(id, num) {
+    if (document.getElementById(`unit-amount-${id}`)) {
+        let amount = parseInt(document.getElementById(`unit-amount-${id}`).textContent.slice(1));
+        amount += num;
+        document.getElementById(`unit-amount-${id}`).textContent = `x${amount}`;
     
+        let price = parseFloat(document.getElementById(`unit-price-${id}`).textContent.slice(1));
+        const total = (amount * price).toFixed(2);
+    
+        document.getElementById(`unit-total-${id}`).textContent = `$${total}`;
+    
+        return total;
+    }
+}
+
+/* Calculating Total For All Items In Active Cart */
+function calculateCartPrice() {
+    if (document.getElementById(`order-total`)) {
+
+    }
 }
 
 /* Displaying Total Items In Cart & Cost */
@@ -114,18 +129,18 @@ function createCartOrder() {
     calculatedOrder.classList.add('order');
 
     const orderLabel = document.createElement('span');
+    orderLabel.id = 'order-label';
     orderLabel.textContent = "Order Total";
     orderLabel.classList.add(
-        'order-label',
         'redhat-normal',
     );
 
     const orderTotal = document.createElement('span');
-    orderTotal.textContent = "$5.50";
+    orderTotal.id = 'order-total';
+    orderTotal.textContent = "$0.00";
     orderTotal.classList.add(
-        'order-total',
         'sub-heading-fs',
-        'fw-700'
+        'fw-700',
     );
 
     calculatedOrder.append(orderLabel, orderTotal);
@@ -168,5 +183,6 @@ function createOrderDisplay() {
 export { 
     createActiveCart,
     handleCurrentSelection, 
-    createOrderDisplay
+    createOrderDisplay,
+    calculateSelection,
 }

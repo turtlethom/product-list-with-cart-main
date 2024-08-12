@@ -1,5 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
-import { createActiveCart, handleCurrentSelection, createOrderDisplay } from "../atc-section/activeCart.js";
+import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -49,37 +49,39 @@ function createCounterATCButton(productId, baseAtcButton) {
   const counterDisplay = document.createElement("span");
   /* Selecting Current Product Card */
   const productCard = document.getElementById(`product-${productId}`);
-  /* Parsing Count String Into Int */
-  let productInCart = parseInt(productCard.dataset.count); // 0
+  /* Grabbing Product Added So Far By The User */
+  let individualProductAdded = parseInt(productCard.dataset.count);
+  /* Grabbing Current Selection */
+  const currSelection = document.getElementById(`selection-${productId}`);
+  /* Grabbing ATC Heading For Total Items In Cart */
 
   /* Selecting Image Of Product Instace */
   const productPicture = document.getElementById(`img-${productId}`);
   productPicture.classList.add('selected');
   
 
-  counterDisplay.textContent = `${productInCart}`;
+  counterDisplay.textContent = `${individualProductAdded}`;
 
   /* Decrement Functionality */
   const decrementBtn = createDecrementButton();
   decrementBtn.addEventListener("click", () => {
-    productInCart -= 1;
+    individualProductAdded -= 1;
     // Updating Counter Display To New Count
-    counterDisplay.textContent = productInCart;
+    counterDisplay.textContent = individualProductAdded;
     // Updating New Cart Count On Product Card Instance Itself
-    productCard.dataset.count = productInCart;
+    productCard.dataset.count = individualProductAdded;
     // Updating Selection Count
-    if (document.getElementById(`selection-${productId}`)) {
-      document.getElementById(`selection-${productId}`).dataset.count--;
+    if (currSelection) {
+      currSelection.dataset.count--;
     }
     // Updating ATC Heading Count & Text Content
     let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
       headingCount -= 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      // console.log(document.getElementById('atc-heading').dataset.count)
 
       /* Reset Selection */
-    if (productInCart <= 0) {
+    if (individualProductAdded <= 0) {
       decrementBtn.parentElement.remove();
       baseAtcButton.classList.remove("hidden");
       productPicture.classList.remove('selected');
@@ -93,16 +95,19 @@ function createCounterATCButton(productId, baseAtcButton) {
       document.getElementById('active-cart').remove();
     }
 
+    /* Decrementing Amount & Unit Price / Updating Total Of Selection */
+    const selectionTotal = calculateSelection(productId, -1);
+
   });
 
   /* Increment Functionality */
   const incrementBtn = createIncrementButton();
   incrementBtn.addEventListener("click", () => {
-    productInCart += 1;
+    individualProductAdded += 1;
     // Updating Counter Display To New Count
-    counterDisplay.textContent = productInCart;
+    counterDisplay.textContent = individualProductAdded;
     // Updating New Cart Count On Product Card Instance Itself
-    productCard.dataset.count = productInCart;
+    productCard.dataset.count = individualProductAdded;
     // Updating Selection Count
     document.getElementById(`selection-${productId}`).dataset.count++;
     // Updating ATC Heading Count & Text Content
@@ -110,7 +115,10 @@ function createCounterATCButton(productId, baseAtcButton) {
       headingCount += 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      // console.log(document.getElementById('atc-heading').dataset.count)
+    
+    /* Incrementing Amount & Unit Price / Updating Total Of Selection */
+    const selectionTotal = calculateSelection(productId, 1);
+    
   });
 
   container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -150,9 +158,6 @@ function createBaseATCButton(source, text, productId) {
       document.getElementById('atc-heading').dataset.count = headingCount;
       document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
       // console.log(document.getElementById('atc-heading').dataset.count)
-
-      
-      
       /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
     const baseAtcButton = document.getElementById(baseATCButton.id);
     /* Creating ATC Counter <button> Element */
