@@ -1,5 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
-import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection } from "../atc-section/activeCart.js";
+import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection, calculateCartPrice } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -97,7 +97,7 @@ function createCounterATCButton(productId, baseAtcButton) {
 
     /* Decrementing Amount & Unit Price / Updating Total Of Selection */
     const selectionTotal = calculateSelection(productId, -1);
-
+    calculateCartPrice(productId, "subtract");
   });
 
   /* Increment Functionality */
@@ -118,7 +118,7 @@ function createCounterATCButton(productId, baseAtcButton) {
     
     /* Incrementing Amount & Unit Price / Updating Total Of Selection */
     const selectionTotal = calculateSelection(productId, 1);
-    
+    calculateCartPrice(productId, "add");
   });
 
   container.append(decrementBtn, counterDisplay, incrementBtn);
@@ -180,7 +180,6 @@ function createBaseATCButton(source, text, productId) {
 
     let activeCart = document.getElementById('active-cart');
 
-    
     /* If Active Cart Does Not Exist, Create It */
     if (!activeCart) {
       /* Create Order Display If There Isn't An Active Cart */
@@ -189,7 +188,7 @@ function createBaseATCButton(source, text, productId) {
       activeCart.append(order);
     }
     handleCurrentSelection(productId, activeCart);
-    // console.log(activeCart)
+    calculateCartPrice(productId, "add");
 
   });
 

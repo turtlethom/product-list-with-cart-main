@@ -277,7 +277,7 @@ hr {
 #order-label { grid-area: label; }
 #order-total { grid-area: total; }
 .cn-message { grid-area: message; }
-.confirm-button {grid-area: button;}
+.confirm-button { grid-area: button; }
 
 #order-label {
     text-align: left;

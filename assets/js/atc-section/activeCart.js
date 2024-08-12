@@ -24,8 +24,8 @@ function handleCurrentSelection(productId, activeCart) {
         selection.classList.add('cart-item');
         selection.dataset.count = 1;
         /* Parsing Strings For Calculating Totals */
-        const parsedAmount = parseInt(selection.dataset.count);
-        const parsedPrice = parseFloat(productDetails.children[2].textContent.slice(1)).toFixed(2);
+        const initialAmount = parseInt(selection.dataset.count);
+        const initialPrice = parseFloat(productDetails.children[2].textContent.slice(1)).toFixed(2);
 
         const unitTitle = document.createElement('h4');
         unitTitle.textContent = productDetails.children[1].textContent;
@@ -37,9 +37,9 @@ function handleCurrentSelection(productId, activeCart) {
         /* Adding Unit (Product) Title */
         selection.append(unitTitle);
         /* Handling The Details Of The Selected Individual Product */
-        const itemDetails = createItemDetails(parsedAmount, parsedPrice, productId);
+        const itemDetails = createItemDetails(initialAmount, initialPrice, productId);
         selection.append(itemDetails);
-        // activeCart.insertAdjacentElement('beforebegin', selection);
+        /* Ensuring Selection Is ALWAYS Inserted AFTER The BEGINNING Of Active Cart */
         activeCart.insertAdjacentElement('afterbegin', selection);
         /* Creating <hr> Element For Visual Separator Of Items */
         const hr = document.createElement('hr');
@@ -51,6 +51,7 @@ function handleCurrentSelection(productId, activeCart) {
         removeButton.appendChild(removeIcon);
         removeButton.classList.add('remove-btn');
         selection.append(removeButton);
+
     }
 }
 
@@ -117,8 +118,21 @@ function calculateSelection(id, num) {
 }
 
 /* Calculating Total For All Items In Active Cart */
-function calculateCartPrice() {
+function calculateCartPrice(id, action) {
     if (document.getElementById(`order-total`)) {
+        let cartTotal = parseFloat(document.getElementById('order-total').textContent.slice(1));
+        let unitPrice = parseFloat(document.getElementById(`unit-price-${id}`).textContent.slice(1));
+        switch (action) {
+            case "add":
+                cartTotal += parseFloat(unitPrice);
+                break;
+            case "subtract":
+                cartTotal -= parseFloat(unitPrice);
+                break;
+            default:
+                return;
+        }
+        document.getElementById('order-total').textContent = `$${cartTotal.toFixed(2)}`;
 
     }
 }
@@ -185,4 +199,5 @@ export {
     handleCurrentSelection, 
     createOrderDisplay,
     calculateSelection,
+    calculateCartPrice,
 }
