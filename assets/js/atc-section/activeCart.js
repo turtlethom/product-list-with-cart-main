@@ -1,5 +1,4 @@
-import { createRemoveIconSVG } from "../util/svg.js";
-import { createConfirmButton } from "./cartBtn.js";
+import { createConfirmButton, createRemoveButton } from "./cartBtn.js";
 
 function createActiveCart() {
     const cartWrapper = document.getElementById('cart-wrapper');
@@ -8,6 +7,11 @@ function createActiveCart() {
     cartWrapper.append(activeCart);
 
     return activeCart;
+
+}
+
+/* Updating The Cart Heading (Count Attribute) & Text Content */
+function updateCartHeading() {
 
 }
 
@@ -46,10 +50,7 @@ function handleCurrentSelection(productId, activeCart) {
         hr.id = `divider-${productId}`;
         selection.insertAdjacentElement('afterend', hr);
         /* Appending Remove Button For Selection */
-        const removeButton = document.createElement('button');
-        const { svg: removeIcon } = createRemoveIconSVG('#CAAFA7');
-        removeButton.appendChild(removeIcon);
-        removeButton.classList.add('remove-btn');
+        const removeButton = createRemoveButton(selection, productId);
         selection.append(removeButton);
 
     }
