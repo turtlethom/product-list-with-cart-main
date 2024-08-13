@@ -20,4 +20,10 @@ function createEmptyCartContent(parent) {
     parent.append(content);
 }
 
+function resetCartSection() {
+    document.getElementById('empty-cart').classList.remove('hidden');
+    // document.getElementById('atc-heading').dataset.count = 0;
+    document.getElementById('active-cart').remove();
+}
+
 export default createEmptyCartContent;

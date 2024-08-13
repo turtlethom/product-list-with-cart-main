@@ -11,8 +11,11 @@ function createActiveCart() {
 }
 
 /* Updating The Cart Heading (Count Attribute) & Text Content */
-function updateCartHeading() {
-
+function updateCartHeading(num) {
+    let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
+    headingCount += num;
+    document.getElementById('atc-heading').dataset.count = headingCount;
+    document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
 }
 
 function handleCurrentSelection(productId, activeCart) {
@@ -201,4 +204,5 @@ export {
     createOrderDisplay,
     calculateSelection,
     calculateCartPrice,
+    updateCartHeading,
 }

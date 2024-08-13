@@ -1,5 +1,5 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
-import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection, calculateCartPrice } from "../atc-section/activeCart.js";
+import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection, calculateCartPrice, updateCartHeading } from "../atc-section/activeCart.js";
 
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
@@ -74,6 +74,8 @@ function createCounterATCButton(productId, baseAtcButton) {
       currSelection.dataset.count--;
     }
     // Updating ATC Heading Count & Text Content
+    // TODO: TRY TO REPLACE
+    // updateCartHeading(-1);
     let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
       headingCount -= 1;
       document.getElementById('atc-heading').dataset.count = headingCount;
@@ -89,6 +91,7 @@ function createCounterATCButton(productId, baseAtcButton) {
     }
     /* Decrementing Amount & Unit Price / Updating Total Of Selection */
     calculateSelection(productId, -1);
+    /* Updating Total Cart Price */
     calculateCartPrice(productId, "subtract");
 
     /* Reset Active Cart To Empty Cart*/
@@ -110,13 +113,10 @@ function createCounterATCButton(productId, baseAtcButton) {
     // Updating Selection Count
     document.getElementById(`selection-${productId}`).dataset.count++;
     // Updating ATC Heading Count & Text Content
-    let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
-      headingCount += 1;
-      document.getElementById('atc-heading').dataset.count = headingCount;
-      document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-    
+    updateCartHeading(1);
     /* Incrementing Amount & Unit Price / Updating Total Of Selection */
     calculateSelection(productId, 1);
+    /* Updating Total Cart Price */
     calculateCartPrice(productId, "add");
   });
 
@@ -147,21 +147,16 @@ function createBaseATCButton(source, text, productId) {
 
   /* Adding On Click Event For BASE ATC BUTTON */
   baseATCButton.addEventListener("click", () => {
-      /* Selecting Current Product Card */
-      const productCard = document.getElementById(`product-${productId}`);
-      /* Initializing Product Card's Cart Count To 1 */
-      productCard.dataset.count = "1";
-      /* Initializing ATC Heading Count To 1 */
-      let headingCount = parseInt(document.getElementById('atc-heading').dataset.count);
-      headingCount += 1;
-      document.getElementById('atc-heading').dataset.count = headingCount;
-      document.getElementById('atc-heading').textContent = `Your Cart (${headingCount})`;
-      // console.log(document.getElementById('atc-heading').dataset.count)
-      /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
+    /* Selecting Current Product Card */
+    const productCard = document.getElementById(`product-${productId}`);
+    /* Initializing Product Card's Cart Count To 1 */
+    productCard.dataset.count = "1";
+    /* Initializing ATC Heading Count To 1 */
+    updateCartHeading(1);
+    /* Selecting Base ATC Btn & Passing Reference to Counter Btn */
     const baseAtcButton = document.getElementById(baseATCButton.id);
     /* Creating ATC Counter <button> Element */
     const atcCounterButton = createCounterATCButton(productId, baseAtcButton);
-
 
     /* Appending Counter <button> to parent reference (pictureContent) */
     const pictureContent = baseATCButton.parentElement;
@@ -170,23 +165,21 @@ function createBaseATCButton(source, text, productId) {
     /* Hiding Initial ATC Button */
     baseATCButton.classList.add("hidden");
 
-    /* ======================== */
     /* Displaying Active Cart Content / Hiding Empty Cart Content */
     const emptyCart = document.getElementById('empty-cart');
     emptyCart.classList.add('hidden');
 
-    // const cartAmount = document.getElementById('atc-heading').dataset.inCart;
-
-    let activeCart = document.getElementById('active-cart');
-
     /* If Active Cart Does Not Exist, Create It */
+    let activeCart = document.getElementById('active-cart');
     if (!activeCart) {
       /* Create Order Display If There Isn't An Active Cart */
       const order = createOrderDisplay();
       activeCart = createActiveCart();
       activeCart.append(order);
     }
+    /* Creating OR Updating Selected Item */
     handleCurrentSelection(productId, activeCart);
+    /* Updating Total Cart Price */
     calculateCartPrice(productId, "add");
 
   });
