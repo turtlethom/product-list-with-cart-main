@@ -1,4 +1,5 @@
 import { createConfirmButton, createRemoveButton } from "./cartBtn.js";
+import { resetCartSection } from "./emptyCart.js";
 
 function createActiveCart() {
     const cartWrapper = document.getElementById('cart-wrapper');
@@ -43,19 +44,57 @@ function handleCurrentSelection(productId, activeCart) {
         );
         /* Adding Unit (Product) Title */
         selection.append(unitTitle);
+
         /* Handling The Details Of The Selected Individual Product */
         const itemDetails = createItemDetails(initialAmount, initialPrice, productId);
         selection.append(itemDetails);
-        /* Ensuring Selection Is ALWAYS Inserted AFTER The BEGINNING Of Active Cart */
+
+        /* Ensuring Selection Is ALWAYS Inserted AFTER The BEGINNING Of Active Cart */ 
         activeCart.insertAdjacentElement('afterbegin', selection);
         /* Creating <hr> Element For Visual Separator Of Items */
         const hr = document.createElement('hr');
         hr.id = `divider-${productId}`;
         selection.insertAdjacentElement('afterend', hr);
-        /* Appending Remove Button For Selection */
-        const removeButton = createRemoveButton(selection, productId);
-        selection.append(removeButton);
 
+        /* Appending Remove Button For Selection */
+        const removeButton = createRemoveButton();
+            
+        // Adding Remove Button Functionality For Each Item
+        removeButton.addEventListener('click', () => {
+            // Reduce Total Shown In Cart
+            const itemAmount = parseInt(document.getElementById(`unit-amount-${productId}`).textContent.slice(1));
+            const itemPrice = parseFloat(document.getElementById(`unit-total-${productId}`).textContent.slice(1));
+            
+            let cartCount = parseInt(document.getElementById(`atc-heading`).dataset.count);
+            let orderTotal = parseFloat(document.getElementById('order-total').textContent.slice(1));
+            
+            document.getElementById(`counter-${productId}`).remove();
+            document.getElementById(`base-atc-${productId}`).classList.remove('hidden');
+            
+            
+
+            cartCount -= itemAmount;
+            orderTotal -= itemPrice;
+            document.getElementById('order-total').textContent = `$${orderTotal.toFixed(2)}`;
+ 
+            document.getElementById(`atc-heading`).dataset.count = cartCount;
+            document.getElementById(`atc-heading`).textContent = `Your Cart(${cartCount})`
+            document.getElementById(`divider-${productId}`).remove()
+            // Handling Removal Of Displayed Item Elements
+            const cartChildren = document.querySelectorAll('.cart-item');
+            selection.remove();
+            if (!cartChildren) {
+                document.getElementById('active-cart').remove();
+            }
+            // If Order Total Is $0.00
+            if (!orderTotal) {
+                resetCartSection();                
+                console.log("Executed")
+                return;
+            }
+        });
+        selection.append(removeButton);
+         
     }
 }
 

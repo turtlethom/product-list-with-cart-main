@@ -8,7 +8,7 @@ function createConfirmButton() {
     return confirmButton;
 }
 
-function createRemoveButton(selection, id) {
+function createRemoveButton() {
     const button = document.createElement('button');
     const baseFill = '#CAAFA7';
     const hoverFill = 'hsl(var(--rose-900))';
@@ -25,15 +25,6 @@ function createRemoveButton(selection, id) {
     button.addEventListener('mouseout', () => {
         path.setAttribute('fill', baseFill);
         button.classList.remove('remove-btn-hover')
-    });
-
-    button.addEventListener('click', () => {
-        // const cartChildren = document.querySelectorAll('.cart-item');
-        // selection.remove();
-        // document.getElementById(`divider-${id}`).remove();
-        // if (!cartChildren) {
-        //     document.getElementById('active-cart').remove();
-        // }
     });
 
     return button;

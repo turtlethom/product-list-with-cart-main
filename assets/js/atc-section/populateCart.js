@@ -1,4 +1,4 @@
-import createEmptyCartContent from "./emptyCart.js";
+import { createEmptyCartContent } from "./emptyCart.js";
 
 function populateATCSection() {
     const cartSection = document.getElementById('cart-wrapper');
