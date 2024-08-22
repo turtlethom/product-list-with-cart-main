@@ -1,6 +1,8 @@
 import { createDecrementSVG, createIncrementSVG } from "./svg.js";
 import { createActiveCart, handleCurrentSelection, createOrderDisplay, calculateSelection, calculateCartPrice, updateCartHeading } from "../atc-section/activeCart.js";
 
+/* Handles All Buttons Within The Product Section */
+
 /* Buttons For ATC Counter Container */
 function createDecrementButton() {
   const button = document.createElement("button");
