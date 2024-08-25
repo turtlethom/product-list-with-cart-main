@@ -33,100 +33,42 @@
 
 /* Utility Classes */
 
-.text-red {
-  color: hsl(var(--red));
-}
-
-.text-green {
-  color: hsl(var(--green));
-}
-
-.text-rose-50 {
-  color: hsl(var(--rose-50));
-}
-
-.text-rose-100 {
-  color: hsl(var(--rose-100));
-}
-
+.text-red { color: hsl(var(--red)); }
+.text-green { color: hsl(var(--green)); }
+.text-rose-50 { color: hsl(var(--rose-50)); }
+.text-rose-100 { color: hsl(var(--rose-100)); }
 .text-rose-300 {
   color: hsl(var(--rose-300));
 }
+.text-rose-400 { color: hsl(var(--rose-400)); }
+.text-rose-500 { color: hsl(var(--rose-500)); }
+.text-rose-900 { color: hsl(var(--rose-900)); }
 
-.text-rose-400 {
-  color: hsl(var(--rose-400));
-}
+.bg-red { background-color: hsl(var(--red)); }
+.bg-green { background-color: hsl(var(--green)); }
+.bg-rose-50 { background-color: hsl(var(--rose-50)); }
+.bg-rose-100 { background-color: hsl(var(--rose-100)); }
+.bg-rose-300 { background-color: hsl(var(--rose-300)); }
+.bg-rose-400 { background-color: hsl(var(--rose-400)); }
+.bg-rose-500 { background-color: hsl(var(--rose-500)); }
+.bg-rose-900 { background-color: hsl(var(--rose-900)); }
 
-.text-rose-500 {
-  color: hsl(var(--rose-500));
-}
+.fw-400 { font-weight: 400; }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
 
-.text-rose-900 {
-  color: hsl(var(--rose-900));
-}
-
-.bg-red {
-  background-color: hsl(var(--red));
-}
-
-.bg-green {
-  background-color: hsl(var(--green));
-}
-
-.bg-rose-50 {
-  background-color: hsl(var(--rose-50));
-}
-
-.bg-rose-100 {
-  background-color: hsl(var(--rose-100));
-}
-
-.bg-rose-300 {
-  background-color: hsl(var(--rose-300));
-}
-
-.bg-rose-400 {
-  background-color: hsl(var(--rose-400));
-}
-
-.bg-rose-500 {
-  background-color: hsl(var(--rose-500));
-}
-
-.bg-rose-900 {
-  background-color: hsl(var(--rose-900));
-}
-
-.fw-400 {
-  font-weight: 400;
-}
-
-.fw-600 {
-  font-weight: 600;
-}
-
-.fw-700 {
-  font-weight: 700;
-}
-
-.product-fs {
-  font-size: var(--product-fs);
-}
-
+.product-fs { font-size: var(--product-fs); }
 .main-heading-fs {
   font-size: var(--main-heading-fs);
   font-family: var(--redhat-font);
 }
-
 .sub-heading-fs {
   font-size: var(--sub-heading-fs);
   font-family: var(--redhat-font);
 }
-
 .redhat-normal {
   font-family: var(--redhat-font);
 }
-
 .redhat-italic {
   font-family: var(--redhat-font);
   font-style: italic;
@@ -146,6 +88,7 @@
   place-items: center;
 }
 
+/* Extra Default Styling */
 .prevent-select,
 object,
 img {
@@ -159,9 +102,8 @@ button {
   cursor: pointer;
 }
 
-hr {
-  border: 1px solid hsl(var(--rose-100));
-}
+hr { border: 1px solid hsl(var(--rose-100)); }
+#confirmed-items > hr { inline-size: 95%; }
 
 /* Custom CSS */
 
@@ -214,24 +156,17 @@ hr {
   row-gap: 1rem;
 }
 
-.picture-content {
-  position: relative;
-}
+.picture-content { position: relative; }
 
-.product-content>*:not(.product-name) {
-  width: max-content;
-}
+.product-content>*:not(.product-name) { width: max-content; }
 
-.product-picture>img {
-  border-radius: 1em;
-}
+.product-picture>img { border-radius: 1em; }
 
 .product-content {
   padding-block: 1rem;
 }
 
 /* Product ATC Button Styling */
-
 .atc-btn,
 .atc-counter-btn {
   display: flex;
@@ -265,9 +200,7 @@ hr {
   background-color: hsl(var(--red));
 }
 
-.atc-counter-btn span {
-  pointer-events: none;
-}
+.atc-counter-btn span { pointer-events: none; }
 
 /* Add To Cart (User's Current Cart) Section Styling */
 
@@ -279,18 +212,14 @@ hr {
   border-radius: 1em;
 }
 
-#atc-section>h3 {
-  justify-self: start;
-}
+#atc-section > h3 { justify-self: start; }
 
 #empty-cart {
   gap: 1.5rem;
   margin-top: 1rem;
 }
 
-#empty-cart>p {
-  text-wrap: nowrap;
-}
+#empty-cart>p { text-wrap: nowrap; }
 
 .cart-item {
   display: grid;
@@ -300,17 +229,9 @@ hr {
   row-gap: 0.5rem;
 }
 
-.unit-title {
-  grid-area: title;
-}
-
-.cart-item-details {
-  grid-area: details;
-}
-
-.remove-btn {
-  grid-area: btn;
-}
+.unit-title { grid-area: title; }
+.cart-item-details { grid-area: details; }
+.remove-btn { grid-area: btn; }
 
 .cart-item {
   align-items: center;
@@ -323,9 +244,7 @@ hr {
   gap: 0.5rem;
 }
 
-.amount {
-  padding-right: 0.75rem;
-}
+.amount { padding-right: 0.75rem; }
 
 .price:before {
   content: "@ ";
@@ -343,6 +262,7 @@ hr {
 
 .order {
   display: grid;
+  padding-top: 1rem;
   grid-template-areas:
     "label total"
     "message message"
@@ -399,14 +319,22 @@ hr {
 
 /* Order Confirmation Styling */
 
+#order-message {
+  grid-area: msg;
+  padding-block: 1rem;
+}
+
+#order-message > *:not(:first-child) { margin-top: 1rem; }
+#order-message > p:last-child { margin-bottom: 1rem; }
+
 #order-confirmation-box {
   position: fixed;
   display: grid;
-  row-gap: 1rem;
   width: min(40rem, 100%);
   border: 1px solid hsl(var(--rose-100));
   border-radius: 1em;
-  padding: 2rem;
+  padding-block: 2rem;
+  padding-inline: 2rem;
   grid-template-areas:
     "msg"
     "items"
@@ -415,26 +343,23 @@ hr {
   bottom: 50%;
 }
 
-#order-message {
-  grid-area: msg;
-}
-
 #confirmed-items {
   grid-area: items;
+  border-radius: 1em;
 }
-
-#confirmed-order {
-  grid-area: order;
-}
+#confirmed-order { grid-area: order; }
 
 .order-item {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  margin-inline: auto;
+  padding: 1rem 0.5rem;
 }
 
-.thumbnail {
-  border-radius: 1em;
+.thumbnail { 
+  margin-left: 1rem;
+  border-radius: 1em; 
+  height: 75px;
 }
 
 .confirmed-details {
@@ -452,14 +377,14 @@ hr {
   white-space: nowrap;
 }
 
-.details-wrapper {
-  grid-area: details;
-}
+.details-wrapper { grid-area: details; }
 
 #confirmed-order {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  padding-top: 1rem;
+  border-radius: 0 0 1em 1em;
 }
 
 .confirmed-total {
@@ -467,11 +392,18 @@ hr {
   margin-right: 1rem;
 }
 
+#new-order-btn {
+  margin-top: 2rem;
+  margin-inline: auto;
+  inline-size: 90%;
+  padding: 0.75rem;
+  border-radius: 2em;
+  border: 1px solid hsl(var(--red));
+}
+
 /* Handling Hovering/Focusing & Other State Styling */
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 .selected {
   border: 2px solid hsl;
@@ -493,7 +425,8 @@ hr {
   background-color: white;
 }
 
-.confirm-button:hover {
+.confirm-button:hover,
+#new-order-btn:hover {
   filter: grayscale(60%);
 }
 
@@ -561,6 +494,10 @@ hr {
     margin-inline: 0;
   }
 
+  .thumbnail {
+    margin-left: 0;
+  }
+
   #product-grid {
     --repeat: 1;
   }
@@ -570,10 +507,6 @@ hr {
   }
 
   #order-confirmation-box {
-    padding: 0.5rem;
-  }
-
-  .order-item {
-    padding: 0;
+    padding-inline: 0.5rem;
   }
 }
