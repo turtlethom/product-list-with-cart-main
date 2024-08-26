@@ -406,7 +406,7 @@ hr { border: 1px solid hsl(var(--rose-100)); }
 .hidden { display: none; }
 
 .selected {
-  border: 2px solid hsl;
+  border: 2px solid hsl(var(--red));
   border-radius: 1em;
 }
 

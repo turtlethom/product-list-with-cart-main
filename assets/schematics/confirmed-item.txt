@@ -1,0 +1,13 @@
+
+<div id="ordered-1" class="order-item">
+    <img class="thumbnail" src="assets/images/jpg/image-creme-brulee-thumbnail.jpg" alt="">
+    <div class="confirmed-details cart-item-details">
+        <h4 class="confirmed-title product-fs text-rose-900 fw-600 redhat-normal">Vanilla Bean Creme Brulee</h4>
+        <div class="details-wrapper">
+            <span id="confirmed-unit-amount-1" class="confirmed-amount amount redhat-normal text-red fw-700">x1</span>
+            <span id="confirmed-price-1" class="confirmed-price price redhat-normal text-rose-500">$7.00</span>
+        </div>
+    </div>
+    <span id="confirmed-total-1" class="confirmed-total total redhat-normal text-rose-500 fw-700">$7.00</span>
+</div>
+<hr class="bg-rose-50">
