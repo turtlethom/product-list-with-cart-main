@@ -1,5 +1,12 @@
 import createPictureContent from "./pictureContent.js";
 
+
+function resetProductSection(id) {
+  document.getElementById(`counter-${id}`).remove();
+  document.getElementById(`base-atc-${id}`).classList.remove("hidden");
+  document.getElementById(`img-${id}`).classList.remove("selected");
+}
+
 /* Handling Creation Of The Product Description */
 function createProductContent(name, category, price, productId) {
     /* Creating `name`, `category`, & `price` elements */
@@ -87,4 +94,4 @@ function populateProductSection(jsonData) {
     }
 }
 
-export default populateProductSection;
+export { resetProductSection, populateProductSection };

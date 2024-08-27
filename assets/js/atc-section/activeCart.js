@@ -1,3 +1,4 @@
+import { resetProductSection } from "../products-section/productContent.js";
 import { createConfirmButton, createRemoveButton } from "../util/cartButtons.js";
 import handleConfirmButton from "../util/confirmationButtons.js";
 import { resetCartSection } from "./emptyCart.js";
@@ -18,52 +19,50 @@ function updateCartHeading(num) {
   );
   headingCount += num;
   document.getElementById("atc-heading").dataset.count = headingCount;
-  document.getElementById(
-    "atc-heading"
-  ).textContent = `Your Cart (${headingCount})`;
+  document.getElementById("atc-heading").textContent = `Your Cart (${headingCount})`;
 }
 
-function handleCurrentSelection(productId, activeCart) {
+function handleCurrentSelection(id, activeCart) {
   /* Grabbing Element With Product Information */
   const productDetails = document.getElementById(
-    `product-${productId}-details`
+    `product-${id}-details`
   );
   /* Looking For Existing Cart Selection */
-  let cartSelection = document.getElementById(`selection-${productId}`);
+  let cartSelection = document.getElementById(`selection-${id}`);
   /* If Selection Does Not Exist, Create Instance */
   if (!cartSelection) {
     /* Creating Selection Element & Appending It To Active Cart */
     cartSelection = document.createElement("div");
-    cartSelection.id = `selection-${productId}`;
-    cartSelection.classList.add("cart-item");
+    cartSelection.id = `selection-${id}`;
+    cartSelection.classList.add(
+      "cart-item"
+    );
     cartSelection.dataset.count = 1;
 
     // let confirmedSelection = createConfirmedSelection();
     /* Parsing Strings For Calculating Totals */
     const initialAmount = parseInt(cartSelection.dataset.count);
-    const initialPrice = parseFloat(
-      productDetails.children[2].textContent.slice(1)
-    ).toFixed(2);
+    const initialPrice = parseFloat(productDetails.children[2].textContent.slice(1)).toFixed(2);
 
     const unitTitle = document.createElement("h4");
     unitTitle.textContent = productDetails.children[1].textContent;
-    unitTitle.classList.add("unit-title", "text-rose-900", "redhat-normal");
+    unitTitle.classList.add(
+      "unit-title",
+      "text-rose-900",
+      "redhat-normal"
+    );
     /* Adding Unit (Product) Title */
     cartSelection.append(unitTitle);
 
     /* Handling The Details Of The Selected Individual Product */
-    const itemDetails = createItemDetails(
-      initialAmount,
-      initialPrice,
-      productId
-    );
+    const itemDetails = createItemDetails(initialAmount, initialPrice, id);
     cartSelection.append(itemDetails);
 
     /* Ensuring Selection Is ALWAYS Inserted AFTER The BEGINNING Of Active Cart */
     activeCart.insertAdjacentElement("afterbegin", cartSelection);
     /* Creating <hr> Element For Visual Separator Of Items */
     const hr = document.createElement("hr");
-    hr.id = `divider-${productId}`;
+    hr.id = `divider-${id}`;
     cartSelection.insertAdjacentElement("afterend", hr);
 
     /* Appending Remove Button For Selection */
@@ -73,10 +72,10 @@ function handleCurrentSelection(productId, activeCart) {
     removeButton.addEventListener("click", () => {
       // Reduce Total Shown In Cart
       const itemAmount = parseInt(
-        document.getElementById(`unit-amount-${productId}`).textContent.slice(1)
+        document.getElementById(`unit-amount-${id}`).textContent.slice(1)
       );
       const itemPrice = parseFloat(
-        document.getElementById(`unit-total-${productId}`).textContent.slice(1)
+        document.getElementById(`unit-total-${id}`).textContent.slice(1)
       );
 
       let cartCount = parseInt(
@@ -85,23 +84,16 @@ function handleCurrentSelection(productId, activeCart) {
       let orderTotal = parseFloat(
         document.getElementById("order-total").textContent.slice(1)
       );
-
-      document.getElementById(`counter-${productId}`).remove();
-      document
-        .getElementById(`base-atc-${productId}`)
-        .classList.remove("hidden");
+      // Resetting Button States In Product Section
+      resetProductSection(id);
 
       cartCount -= itemAmount;
       orderTotal -= itemPrice;
-      document.getElementById(
-        "order-total"
-      ).textContent = `$${orderTotal.toFixed(2)}`;
+      document.getElementById("order-total").textContent = `$${orderTotal.toFixed(2)}`;
 
       document.getElementById(`atc-heading`).dataset.count = cartCount;
-      document.getElementById(
-        `atc-heading`
-      ).textContent = `Your Cart(${cartCount})`;
-      document.getElementById(`divider-${productId}`).remove();
+      document.getElementById(`atc-heading`).textContent = `Your Cart(${cartCount})`;
+      document.getElementById(`divider-${id}`).remove();
 
       // Handling Removal Of Displayed Item Elements
       const cartChildren = document.querySelectorAll(".cart-item");
@@ -165,9 +157,7 @@ function calculateSelection(id, num) {
     amount += num;
     document.getElementById(`unit-amount-${id}`).textContent = `x${amount}`;
 
-    let price = parseFloat(
-      document.getElementById(`unit-price-${id}`).textContent.slice(1)
-    );
+    let price = parseFloat(document.getElementById(`unit-price-${id}`).textContent.slice(1));
     const total = (amount * price).toFixed(2);
 
     document.getElementById(`unit-total-${id}`).textContent = `$${total}`;

@@ -1,4 +1,6 @@
+import { resetCartSection } from "../atc-section/emptyCart.js";
 import { createConfirmedSelection, updateConfirmedOrderTotal } from "../confirmation/confirmation.js";
+import { resetProductSection } from "../products-section/productContent.js";
 
 function handleConfirmButton(id) {
     const confirmedList = document.getElementById('confirmed-list');
@@ -20,6 +22,11 @@ function handleConfirmButton(id) {
     // Handle Opening The Dialog Element Upon Button Click
     const dialog = document.querySelector('dialog');
     dialog.showModal();
+}
+
+function handleNewOrderButton() {
+    resetCartSection();
+    resetProductSection();
 }
 
 export default handleConfirmButton;
