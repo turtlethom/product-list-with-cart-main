@@ -172,7 +172,7 @@ function createBaseATCButton(source, text, productId) {
     let activeCart = document.getElementById('active-cart');
     if (!activeCart) {
       /* Create Order Display If There Isn't An Active Cart */
-      const order = createOrderDisplay();
+      const order = createOrderDisplay(productId);
       activeCart = createActiveCart();
       activeCart.append(order);
     }

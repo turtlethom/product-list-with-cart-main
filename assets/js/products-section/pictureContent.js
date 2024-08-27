@@ -12,13 +12,18 @@ function createPicture(image, productId) {
   tabletSource.srcset = image.tablet;
   tabletSource.media = "(min-width: 425px) and (max-width: 768px)";
 
+  /* Appending thumbnail (hidden) for order confirmation */
+  const thumbnailSource = document.createElement("img");
+  thumbnailSource.dataset.thumbnail = image.thumbnail;
+  thumbnailSource.id = `thumbnail-${productId}`;
+
   // Setting default image for each product
   const defaultImg = document.createElement("img");
   defaultImg.src = image.desktop;
 
   // Appending all image sources to new `<picture>`
-  picture.append(mobileSource, tabletSource, defaultImg);
-  picture.id = `img-${productId}`
+  picture.append(mobileSource, tabletSource, thumbnailSource, defaultImg);
+  picture.id = `img-${productId}`;
 
   return picture;
 }

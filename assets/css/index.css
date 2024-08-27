@@ -219,7 +219,7 @@ hr { border: 1px solid hsl(var(--rose-100)); }
   margin-top: 1rem;
 }
 
-#empty-cart>p { text-wrap: nowrap; }
+#empty-cart > p { text-wrap: nowrap; }
 
 .cart-item {
   display: grid;
@@ -235,7 +235,6 @@ hr { border: 1px solid hsl(var(--rose-100)); }
 
 .cart-item {
   align-items: center;
-  align-self: flex-end;
   padding-block: 1rem;
 }
 
@@ -319,14 +318,6 @@ hr { border: 1px solid hsl(var(--rose-100)); }
 
 /* Order Confirmation Styling */
 
-#order-message {
-  grid-area: msg;
-  padding-block: 1rem;
-}
-
-#order-message > *:not(:first-child) { margin-top: 1rem; }
-#order-message > p:last-child { margin-bottom: 1rem; }
-
 dialog[open] {
   position: fixed;
   display: grid;
@@ -343,13 +334,22 @@ dialog[open] {
   bottom: 50%;
 }
 
-#confirmed-items {
-  grid-area: items;
-  border-radius: 1em;
-}
+#confirmed-items { grid-area: items; }
 #confirmed-order { grid-area: order; }
 
-.order-item {
+#order-message {
+  grid-area: msg;
+  padding-block: 1rem;
+}
+
+#order-message > *:not(:first-child) { margin-top: 1rem; }
+#order-message > p:last-child { margin-bottom: 1rem; }
+
+#confirmed-items {
+  border-radius: 1em;
+}
+
+.confirmed-selection {
   display: flex;
   align-items: center;
   margin-inline: auto;
@@ -370,14 +370,16 @@ dialog[open] {
 }
 
 .confirmed-title {
-  grid-area: title;
   flex: 0 1 auto;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.details-wrapper { grid-area: details; }
+.details-wrapper {
+  display: flex;
+  gap: 1rem;
+}
 
 #confirmed-order {
   display: flex;

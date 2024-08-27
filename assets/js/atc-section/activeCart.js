@@ -1,5 +1,5 @@
-import createConfirmedSelection from "../confirmation/confirmation.js";
 import { createConfirmButton, createRemoveButton } from "../util/cartBtn.js";
+import handleConfirmButton from "../util/confirmBtn.js";
 import { resetCartSection } from "./emptyCart.js";
 
 function createActiveCart() {
@@ -102,6 +102,7 @@ function handleCurrentSelection(productId, activeCart) {
         `atc-heading`
       ).textContent = `Your Cart(${cartCount})`;
       document.getElementById(`divider-${productId}`).remove();
+
       // Handling Removal Of Displayed Item Elements
       const cartChildren = document.querySelectorAll(".cart-item");
       cartSelection.remove();
@@ -231,9 +232,9 @@ function createCartMessage() {
   cnImage.alt = "carbon-neutral";
 
   const cnText = document.createElement("span");
-  const bold = document.createElement("strong");
-  bold.textContent = "carbon-neutral";
-  cnText.append("This is a ", bold, " delivery");
+  const boldedText = document.createElement("strong");
+  boldedText.textContent = "carbon-neutral";
+  cnText.append("This is a ", boldedText, " delivery");
 
   cnContainer.append(cnImage, cnText);
 
@@ -242,10 +243,11 @@ function createCartMessage() {
   return cnContainer;
 }
 
-function createOrderDisplay() {
+function createOrderDisplay(id) {
   const order = createCartOrder();
   const cartMessage = createCartMessage();
   const confirmButton = createConfirmButton();
+  confirmButton.addEventListener('click', () => handleConfirmButton(id));
   order.append(cartMessage, confirmButton);
   return order;
 }

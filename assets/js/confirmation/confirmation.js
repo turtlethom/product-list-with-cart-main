@@ -1,10 +1,4 @@
-function createConfirmedDetails(id) {
-    /* Grabbing Info For Displaying Product */
-    const productInfo = document.getElementById(`product-${id}-details`).children;
-    const titleText = productInfo[1].textContent;
-    const priceText = productInfo[2].textContent;
-    const amountText = document.getElementById(`unit-amount-${id}`).textContent;
-
+function createConfirmedDetails(unitTitle, unitAmount, unitPrice, id) {
     /* Creating Confirmed Details Element */
     const confirmedDetails = document.createElement('div');
     confirmedDetails.classList.add(
@@ -20,54 +14,69 @@ function createConfirmedDetails(id) {
         'fw-600',
         'redhat-normal',
     );
-    confirmedTitle.textContent = titleText;
+    confirmedTitle.textContent = unitTitle.textContent;
 
     /* Wrapping Details For Formatting */
     const detailsWrapper = document.createElement('div');
     detailsWrapper.classList.add(
         'details-wrapper',
     );
-    const amount = document.createElement('span');
-    amount.id = `confirmed-unit-amount-${id}`
-    amount.classList.add(
+    const confirmedAmount = document.createElement('span');
+    confirmedAmount.id = `confirmed-unit-amount-${id}`
+    confirmedAmount.classList.add(
         'confirmed-amount',
         'amount',
         'redhat-normal',
         'text-red',
         'fw-700',
     )
-    amount.textContent = amountText;
+    confirmedAmount.textContent = unitAmount.textContent;
 
-    const price = document.createElement('span');
-    price.classList.add(
+    const confirmedPrice = document.createElement('span');
+    confirmedPrice.classList.add(
         'confirmed-amount',
         'amount',
         'redhat-normal',
         'text-rose-500',
     );
-    price.id = `confirmed-price-${id}`;
-    price.textContent = priceText;
+    confirmedPrice.id = `confirmed-price-${id}`;
+    confirmedPrice.textContent = unitPrice.textContent;
 
-    detailsWrapper.append(amount, price);
+    detailsWrapper.append(confirmedAmount, confirmedPrice);
 
     /* Appending Innner Elements To Details  */
     confirmedDetails.append(confirmedTitle, detailsWrapper);
     return confirmedDetails;
 }
 
-function createConfirmedSelection(id) {
-    const totalText = document.getElementById(`unit-total-${id}`).textContent;
+function updateConfirmedOrderTotal() {
+    const orderTotal = document.getElementById('order-total');
+    const confirmedOrderTotal = document.getElementById('confirmed-order-total');
+
+    confirmedOrderTotal.textContent = orderTotal.textContent;
+}
+
+function createConfirmedSelection(cartSelection, id, thumbnail) {
+    /* Cart Item Information */
+    const unitTitle = cartSelection.children[0];
+    const unitAmount = cartSelection.children[1].children[0];
+    const unitPrice = cartSelection.children[1].children[1];
+    const unitTotal = cartSelection.children[1].children[2];
+
+    console.log(unitTitle)
+    console.log(unitAmount)
+    console.log(unitPrice)
+    console.log(unitTotal)
+
+    // const totalText = document.getElementById(`unit-total-${id}`).textContent;
 
     const orderItem = document.createElement('div');
-    orderItem.id = `ordered-${1}`;
+    orderItem.id = `ordered-${id}`;
     orderItem.classList.add(
         'confirmed-selection',
     );
 
-    const thumbnail = document.createElement('img');
-    thumbnail.src = thumbnailSrc;
-
-    const details = createConfirmedDetails(id);
+    const details = createConfirmedDetails(unitTitle, unitAmount, unitPrice, id);
     const confirmedTotal = document.createElement('span');
     confirmedTotal.classList.add(
         'confirmed-total',
@@ -76,7 +85,7 @@ function createConfirmedSelection(id) {
         'text-rose-900',
         'fw-700',
     )
-    confirmedTotal.textContent = totalText;
+    confirmedTotal.textContent = unitTotal.textContent;
 
     /* Adding A Divider */
     const divider = document.createElement('hr');
@@ -87,4 +96,4 @@ function createConfirmedSelection(id) {
     return orderItem;
 }
 
-export default createConfirmedSelection;
+export { createConfirmedSelection, updateConfirmedOrderTotal };
