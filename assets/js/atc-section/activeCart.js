@@ -1,5 +1,5 @@
-import { createConfirmButton, createRemoveButton } from "../util/cartBtn.js";
-import handleConfirmButton from "../util/confirmBtn.js";
+import { createConfirmButton, createRemoveButton } from "../util/cartButtons.js";
+import handleConfirmButton from "../util/confirmationButtons.js";
 import { resetCartSection } from "./emptyCart.js";
 
 function createActiveCart() {
