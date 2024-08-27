@@ -16,6 +16,8 @@ function createPicture(image, productId) {
   const thumbnailSource = document.createElement("img");
   thumbnailSource.dataset.thumbnail = image.thumbnail;
   thumbnailSource.id = `thumbnail-${productId}`;
+  /* Hide thumbnail from DOM */
+  thumbnailSource.classList.add('hidden');
 
   // Setting default image for each product
   const defaultImg = document.createElement("img");
