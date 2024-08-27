@@ -16,6 +16,10 @@ function handleConfirmButton(id) {
     }
 
     updateConfirmedOrderTotal();
+
+    // Handle Opening The Dialog Element Upon Button Click
+    const dialog = document.querySelector('dialog');
+    dialog.showModal();
 }
 
 export default handleConfirmButton;
