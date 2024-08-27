@@ -1,3 +1,4 @@
+import createConfirmedSelection from "../confirmation/confirmation.js";
 import { createConfirmButton, createRemoveButton } from "../util/cartBtn.js";
 import { resetCartSection } from "./emptyCart.js";
 
@@ -27,17 +28,19 @@ function handleCurrentSelection(productId, activeCart) {
   const productDetails = document.getElementById(
     `product-${productId}-details`
   );
-  /* Looking For Existing Selection */
-  let selection = document.getElementById(`selection-${productId}`);
+  /* Looking For Existing Cart Selection */
+  let cartSelection = document.getElementById(`selection-${productId}`);
   /* If Selection Does Not Exist, Create Instance */
-  if (!selection) {
+  if (!cartSelection) {
     /* Creating Selection Element & Appending It To Active Cart */
-    selection = document.createElement("div");
-    selection.id = `selection-${productId}`;
-    selection.classList.add("cart-item");
-    selection.dataset.count = 1;
+    cartSelection = document.createElement("div");
+    cartSelection.id = `selection-${productId}`;
+    cartSelection.classList.add("cart-item");
+    cartSelection.dataset.count = 1;
+
+    // let confirmedSelection = createConfirmedSelection();
     /* Parsing Strings For Calculating Totals */
-    const initialAmount = parseInt(selection.dataset.count);
+    const initialAmount = parseInt(cartSelection.dataset.count);
     const initialPrice = parseFloat(
       productDetails.children[2].textContent.slice(1)
     ).toFixed(2);
@@ -46,7 +49,7 @@ function handleCurrentSelection(productId, activeCart) {
     unitTitle.textContent = productDetails.children[1].textContent;
     unitTitle.classList.add("unit-title", "text-rose-900", "redhat-normal");
     /* Adding Unit (Product) Title */
-    selection.append(unitTitle);
+    cartSelection.append(unitTitle);
 
     /* Handling The Details Of The Selected Individual Product */
     const itemDetails = createItemDetails(
@@ -54,14 +57,14 @@ function handleCurrentSelection(productId, activeCart) {
       initialPrice,
       productId
     );
-    selection.append(itemDetails);
+    cartSelection.append(itemDetails);
 
     /* Ensuring Selection Is ALWAYS Inserted AFTER The BEGINNING Of Active Cart */
-    activeCart.insertAdjacentElement("afterbegin", selection);
+    activeCart.insertAdjacentElement("afterbegin", cartSelection);
     /* Creating <hr> Element For Visual Separator Of Items */
     const hr = document.createElement("hr");
     hr.id = `divider-${productId}`;
-    selection.insertAdjacentElement("afterend", hr);
+    cartSelection.insertAdjacentElement("afterend", hr);
 
     /* Appending Remove Button For Selection */
     const removeButton = createRemoveButton();
@@ -101,7 +104,7 @@ function handleCurrentSelection(productId, activeCart) {
       document.getElementById(`divider-${productId}`).remove();
       // Handling Removal Of Displayed Item Elements
       const cartChildren = document.querySelectorAll(".cart-item");
-      selection.remove();
+      cartSelection.remove();
       if (!cartChildren) {
         document.getElementById("active-cart").remove();
       }
@@ -112,7 +115,7 @@ function handleCurrentSelection(productId, activeCart) {
         return;
       }
     });
-    selection.append(removeButton);
+    cartSelection.append(removeButton);
   }
 }
 

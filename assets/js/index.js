@@ -13,7 +13,7 @@ function retrieveProductInfo(filepath) {
     .then((data) => {
       // console.log(data);
       populateProductSection(data);
-      populateATCSection();
+      populateATCSection(data);
     })
     .catch((err) => {
       console.error("Error with fetching data: ", err);

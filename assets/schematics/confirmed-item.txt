@@ -1,5 +1,5 @@
 
-<div id="ordered-1" class="order-item">
+<div id="ordered-1" class="confirmed-selection">
     <img class="thumbnail" src="assets/images/jpg/image-creme-brulee-thumbnail.jpg" alt="">
     <div class="confirmed-details cart-item-details">
         <h4 class="confirmed-title product-fs text-rose-900 fw-600 redhat-normal">Vanilla Bean Creme Brulee</h4>

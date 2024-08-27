@@ -55,11 +55,13 @@ function createConfirmedDetails(id) {
     return confirmedDetails;
 }
 
-function createConfirmedSelection(id, thumbnailSrc) {
+function createConfirmedSelection(id) {
+    const totalText = document.getElementById(`unit-total-${id}`).textContent;
+
     const orderItem = document.createElement('div');
     orderItem.id = `ordered-${1}`;
     orderItem.classList.add(
-        'order-item',
+        'confirmed-selection',
     );
 
     const thumbnail = document.createElement('img');
@@ -74,6 +76,7 @@ function createConfirmedSelection(id, thumbnailSrc) {
         'text-rose-900',
         'fw-700',
     )
+    confirmedTotal.textContent = totalText;
 
     /* Adding A Divider */
     const divider = document.createElement('hr');
