@@ -2,8 +2,9 @@ import { resetCartSection } from "../atc-section/emptyCart.js";
 import { resetSelectedProduct } from "../products-section/productContent.js";
 
 function resetConfirmationSection() {
-    const confirmedSelections = document.querySelectorAll('confirmed-selection');
+    const confirmedSelections = document.querySelectorAll('.confirmed-selection');
     const confirmedOrderTotal = document.getElementById('confirmed-order-total');
+    console.log(confirmedSelections)
     const newOrderButton = document.getElementById('new-order-btn');
     for (let i = 0; i < confirmedSelections.length; i++) {
         confirmedSelections[i].remove();
