@@ -18,7 +18,7 @@ function retrieveProductInfo(filepath) {
     .then((data) => {
       // console.log(data);
       populateProductSection(data);
-      populateATCSection(data);
+      populateATCSection();
     })
     .catch((err) => {
       console.error("Error with fetching data: ", err);

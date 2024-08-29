@@ -2,7 +2,8 @@ import { createEmptyCartContent } from "./emptyCart.js";
 
 function populateATCSection() {
     const cartSection = document.getElementById('cart-wrapper');
-    createEmptyCartContent(cartSection);
+    const emptyCartContent = createEmptyCartContent(cartSection);
+    cartSection.append(emptyCartContent);
 }
 
 export default populateATCSection;

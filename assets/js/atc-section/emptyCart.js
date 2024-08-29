@@ -2,7 +2,7 @@
  * 
  * @param {*} parent 
  */
-function createEmptyCartContent(parent) {
+function createEmptyCartContent() {
     /* Creating Empty/Default Cart */
     const content = document.createElement('div');
     content.id = 'empty-cart';
@@ -21,7 +21,7 @@ function createEmptyCartContent(parent) {
 
     content.append(emptyCartImage, emptyCartMessage);
 
-    parent.append(content);
+    return content;
 }
 
 /**
