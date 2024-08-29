@@ -334,6 +334,10 @@ dialog[open] {
   bottom: 50%;
 }
 
+dialog[open]::backdrop {
+  background-color: hsl(0, 0%, 0%, 0.5);
+}
+
 #confirmed-items { grid-area: items; }
 #confirmed-order { grid-area: order; }
 

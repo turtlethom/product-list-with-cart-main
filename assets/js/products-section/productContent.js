@@ -1,13 +1,30 @@
 import createPictureContent from "./pictureContent.js";
 
-
-function resetProductSection(id) {
-  document.getElementById(`counter-${id}`).remove();
-  document.getElementById(`base-atc-${id}`).classList.remove("hidden");
-  document.getElementById(`img-${id}`).classList.remove("selected");
+/**
+ * Resets The Individual Styling And Buttons Of
+ * A Product In The Product Grid
+ * 
+ * @param {number} id - The product ID of the Deleted Selected Item
+ * 
+ */
+function resetSelectedProduct(id) {
+    document.getElementById(`counter-${id}`).remove();
+    document.getElementById(`base-atc-${id}`).classList.remove("hidden");
+    document.getElementById(`img-${id}`).classList.remove("selected");
 }
 
-/* Handling Creation Of The Product Description */
+/**
+ * Handles The Creation Of The Product Description For Each Product.
+ * A unique ID is assigned to each potential product sequencially
+ * 
+ * @param {string} name - Product Name 
+ * @param {string} category - Product Category
+ * @param {string} price - Product Listed Price
+ * @param {number} productId - Unique ID For Product
+ * 
+ * @returns {HTMLDivElement} - Content For Product Description
+ * 
+ */
 function createProductContent(name, category, price, productId) {
     /* Creating `name`, `category`, & `price` elements */
     const nameElement = document.createElement('h2');
@@ -30,7 +47,6 @@ function createProductContent(name, category, price, productId) {
         'fw-500',
         'product-fs',
         'prevent-select',
-        
     ];
     const categoryClasses = [
         'product-category',
@@ -53,14 +69,20 @@ function createProductContent(name, category, price, productId) {
 
     // Adding elements to a wrapper div for styling
     const content = document.createElement('div');
-    // ORDERING HERE IS DIFFERENT!!!
     content.append(categoryElement, nameElement, priceElement);
     content.id = `product-${productId}-details`
 
     return content;
 }
 
-/* Using JSON data To Dynamically Create All Available Products */
+/**
+ * 
+ * Dynamically Populates The Product Grid Utilizing JSON Data.
+ * JSON Format => { image, name, category, price }
+ * 
+ * @param {JSON} jsonData - Represents The JSON data from 'data.json'
+ * 
+ */
 function populateProductSection(jsonData) {
     const productGrid = document.getElementById('product-grid');
     /* Iterate over the Product Data */
@@ -77,21 +99,16 @@ function populateProductSection(jsonData) {
         /* Creating The Picture Content w/ Images & ATC Button */
         const pictureContent = createPictureContent(image, productId);
         pictureContent.classList.add('picture-content', 'stacked');
-
         /* Creating Product Content w/ Name, Category, & Price */
         const productContent = createProductContent(name, category, price, productId);
         productContent.classList.add('product-content');
         /* Creating Unique Ids */
         productId++;
-
         /* Appending All Elements To Product Card */
         productCard.append(pictureContent, productContent);
-
         /* Appending All Elements To Product Section */
         productGrid.append(productCard);
-
-        // console.log(productId)
     }
 }
 
-export { resetProductSection, populateProductSection };
+export { resetSelectedProduct, populateProductSection };

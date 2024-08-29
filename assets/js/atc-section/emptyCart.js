@@ -1,3 +1,7 @@
+/**
+ * 
+ * @param {*} parent 
+ */
 function createEmptyCartContent(parent) {
     /* Creating Empty/Default Cart */
     const content = document.createElement('div');
@@ -20,12 +24,18 @@ function createEmptyCartContent(parent) {
     parent.append(content);
 }
 
+/**
+ * 
+ * Resets All Styling And HTML For The Cart Setting.
+ * Includes Default Text Content For Elements.
+ * 
+ */
 function resetCartSection() {
     document.getElementById('empty-cart').classList.remove('hidden');
 
     // Reset Heading Count
     document.getElementById('atc-heading').dataset.count = 0;
-    document.getElementById('atc-heading').textContent = "Your Cart(0)";
+    document.getElementById('atc-heading').textContent = "Your Cart (0)";
 
     // Remove Active Cart
     document.getElementById('active-cart').remove();

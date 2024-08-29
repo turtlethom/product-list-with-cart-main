@@ -1,6 +1,5 @@
-import { resetProductSection } from "../products-section/productContent.js";
-import { createConfirmButton, createRemoveButton } from "../util/cartButtons.js";
-import handleConfirmButton from "../util/confirmationButtons.js";
+import { resetSelectedProduct } from "../products-section/productContent.js";
+import { createConfirmButton, createRemoveButton, handleConfirmButton } from "../util/cartButtons.js";
 import { resetCartSection } from "./emptyCart.js";
 
 function createActiveCart() {
@@ -24,9 +23,7 @@ function updateCartHeading(num) {
 
 function handleCurrentSelection(id, activeCart) {
   /* Grabbing Element With Product Information */
-  const productDetails = document.getElementById(
-    `product-${id}-details`
-  );
+  const productDetails = document.getElementById(`product-${id}-details`);
   /* Looking For Existing Cart Selection */
   let cartSelection = document.getElementById(`selection-${id}`);
   /* If Selection Does Not Exist, Create Instance */
@@ -84,8 +81,8 @@ function handleCurrentSelection(id, activeCart) {
       let orderTotal = parseFloat(
         document.getElementById("order-total").textContent.slice(1)
       );
-      // Resetting Button States In Product Section
-      resetProductSection(id);
+      // Resetting Button States In Individual Product
+      resetSelectedProduct(id);
 
       cartCount -= itemAmount;
       orderTotal -= itemPrice;
@@ -187,9 +184,7 @@ function calculateCartPrice(id, action) {
       default:
         return;
     }
-    document.getElementById("order-total").textContent = `$${cartTotal.toFixed(
-      2
-    )}`;
+    document.getElementById("order-total").textContent = `$${cartTotal.toFixed(2)}`;
   }
 }
 

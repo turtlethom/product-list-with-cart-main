@@ -1,32 +1,43 @@
 import { resetCartSection } from "../atc-section/emptyCart.js";
-import { createConfirmedSelection, updateConfirmedOrderTotal } from "../confirmation/confirmation.js";
-import { resetProductSection } from "../products-section/productContent.js";
+import { resetSelectedProduct } from "../products-section/productContent.js";
 
-function handleConfirmButton(id) {
-    const confirmedList = document.getElementById('confirmed-list');
-    const cartItems = document.querySelectorAll('.cart-item');
-    
-    for (let i = 0; i < cartItems.length; i++) {
-        // Grabbing thumbnail on hidden image in product section
-        const thumbnail = document.createElement('img');
-        const thumbnailSrc = document.getElementById(`thumbnail-${i + 1}`).dataset.thumbnail;
-        console.log(thumbnailSrc)
-        thumbnail.src = thumbnailSrc;
-
-        const confirmedSelection = createConfirmedSelection(cartItems[i], id, thumbnail);
-        confirmedList.appendChild(confirmedSelection);
+function resetConfirmationSection() {
+    const confirmedSelections = document.querySelectorAll('confirmed-selection');
+    const confirmedOrderTotal = document.getElementById('confirmed-order-total');
+    const newOrderButton = document.getElementById('new-order-btn');
+    for (let i = 0; i < confirmedSelections.length; i++) {
+        confirmedSelections[i].remove();
     }
 
-    updateConfirmedOrderTotal();
-
-    // Handle Opening The Dialog Element Upon Button Click
-    const dialog = document.querySelector('dialog');
-    dialog.showModal();
+    newOrderButton.remove();
+    confirmedOrderTotal.textContent = `$00.00`;
 }
 
+// Handling functionality for creating a new order/ reset.
 function handleNewOrderButton() {
+    const dialog = document.querySelector('dialog');
+    const allSelectedProducts = document.querySelectorAll('.selected');
+    for (let i = 0; i < allSelectedProducts.length; i++) {
+        const parsedId = allSelectedProducts[i].id.slice(4);
+        resetSelectedProduct(parsedId);
+    }
     resetCartSection();
-    resetProductSection();
+    resetConfirmationSection();
+    dialog.close();
 }
 
-export default handleConfirmButton;
+function createNewOrderButton() {
+    const button = document.createElement('button');
+    button.id = 'new-order-btn';
+    button.classList.add(
+        'bg-red',
+        'text-rose-50',
+        'redhat-normal',
+    );
+    button.textContent = 'Create New Order';
+
+    button.addEventListener('click', handleNewOrderButton);
+    return button;
+}
+
+export default createNewOrderButton;

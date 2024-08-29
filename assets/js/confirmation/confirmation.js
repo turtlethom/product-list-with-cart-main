@@ -63,10 +63,10 @@ function createConfirmedSelection(cartSelection, id, thumbnail) {
     const unitPrice = cartSelection.children[1].children[1];
     const unitTotal = cartSelection.children[1].children[2];
 
-    console.log(unitTitle)
-    console.log(unitAmount)
-    console.log(unitPrice)
-    console.log(unitTotal)
+    // console.log(unitTitle)
+    // console.log(unitAmount)
+    // console.log(unitPrice)
+    // console.log(unitTotal)
 
     // const totalText = document.getElementById(`unit-total-${id}`).textContent;
 
@@ -89,7 +89,9 @@ function createConfirmedSelection(cartSelection, id, thumbnail) {
 
     /* Adding A Divider */
     const divider = document.createElement('hr');
-    divider.classList.add('bg-rose-50');
+    divider.classList.add(
+        'bg-rose-50'
+    );
 
     orderItem.append(thumbnail, details, confirmedTotal);
 
