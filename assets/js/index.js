@@ -1,6 +1,5 @@
 import { populateProductSection } from "./products-section/productContent.js";
 import populateATCSection from "./atc-section/populateCart.js";
-
 /**
  * 
  * Retrieving JSON data for products via Fetch API
@@ -25,6 +24,6 @@ function retrieveProductInfo(filepath) {
     });
 }
 
-const productData = "../../data.json";
+const productData = "./assets/data/data.json";
 
 retrieveProductInfo(productData);
