@@ -1,6 +1,5 @@
 /**
  * 
- * @param {*} parent 
  */
 function createEmptyCartContent() {
     /* Creating Empty/Default Cart */

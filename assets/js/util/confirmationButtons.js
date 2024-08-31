@@ -1,10 +1,12 @@
 import { resetCartSection } from "../atc-section/emptyCart.js";
 import { resetSelectedProduct } from "../products-section/productContent.js";
 
+/**
+ * Resets The Confirmation Section Back To Its Default State
+ */
 function resetConfirmationSection() {
     const confirmedSelections = document.querySelectorAll('.confirmed-selection');
     const confirmedOrderTotal = document.getElementById('confirmed-order-total');
-    console.log(confirmedSelections)
     const newOrderButton = document.getElementById('new-order-btn');
     for (let i = 0; i < confirmedSelections.length; i++) {
         confirmedSelections[i].remove();
@@ -14,7 +16,9 @@ function resetConfirmationSection() {
     confirmedOrderTotal.textContent = `$00.00`;
 }
 
-// Handling functionality for creating a new order/ reset.
+/**
+ * The 'onclick' functionality for creating a new order. Reset
+ */
 function handleNewOrderButton() {
     const dialog = document.querySelector('dialog');
     const allSelectedProducts = document.querySelectorAll('.selected');

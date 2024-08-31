@@ -74,6 +74,11 @@ function createRemoveButton() {
     button.classList.remove("remove-btn-hover");
   });
 
+  button.addEventListener('focus', () => {
+    path.setAttribute("fill", hoverFill);
+    button.classList.add("remove-btn-hover");
+  });
+
   return button;
 }
 

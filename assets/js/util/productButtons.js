@@ -21,6 +21,14 @@ function createDecrementButton() {
     path.setAttribute("fill", baseFill);
   });
 
+  button.addEventListener("focus", () => {
+    path.setAttribute("fill", hoverFill);
+  });
+
+  button.addEventListener("focusout", () => {
+    path.setAttribute("fill", baseFill);
+  })
+
   return button;
 }
 
@@ -41,6 +49,14 @@ function createIncrementButton() {
     path.setAttribute("fill", baseFill);
   });
 
+  button.addEventListener("focus", () => {
+    path.setAttribute("fill", hoverFill);
+  });
+
+  button.addEventListener("focusout", () => {
+    path.setAttribute("fill", baseFill);
+  })
+
   return button;
 }
 /* ================================== */
@@ -56,7 +72,7 @@ function createCounterATCButton(productId, baseAtcButton) {
   /* Grabbing Current Selection */
   const currSelection = document.getElementById(`selection-${productId}`);
 
-  /* Selecting Image Of Product Instace */
+  /* Selecting Image Of Product Instance */
   const productPicture = document.getElementById(`img-${productId}`);
   productPicture.classList.add('selected');
   
@@ -138,7 +154,7 @@ function createBaseATCButton(source, text, productId) {
     "text-rose-900",
     "product-fs",
     'prevent-select',
-    ];
+  ];
 
   baseATCButton.append(buttonImg, buttonText);
   baseATCButton.id = `base-atc-${productId}`;
